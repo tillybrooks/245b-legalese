@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Language Study</title>
+  <!-- Load JsPsych -->
+  <script src="https://unpkg.com/jspsych@7.3.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.4"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+  <script src="stims.js"></script>
+  <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <script>
+    // Initialize jsPsych
+    const jsPsych = initJsPsych({
+      show_progress_bar: true,
+        // TB: ok this isn't working for some reason... update it was a missing comma [jsPsych website shows it without a comma; why does that work for them???]
+      on_finish: function() {
+        // Displays data at the end of the experiment
+        // Better to comment out for the real experiment so participants aren't confused
+        jsPsych.data.displayData();
+      }
+    });
+
+    // Simple stimuli for debugging 
+    /*const experimentStimuli = [
+      ["Alice", "met", "Bob"],
+      ["Alice", "and", "Bob", "went", "to", "the", "store"]
+    ];*/
+
+    // We will store each trial in a list called timeline 
+    const timeline = [];
+
+    // Instructions
+    const instructions = {
+      type: jsPsychInstructions,
+      pages: ['<div class="content"><h2>Self-Paced Reading Time Study</h2>'+ 
+        '<p>In this experiment, you will read sentences one word at a time. </p>'+
+        '<p>Press SPACE to reveal each word.</p></div>'+
+        '<p>Please read at a natural pace, as you normally would.</p>' +
+       '<p>Click Next to begin.</p></div>'
+
+        ],
+        show_clickable_nav: true, //ok so you need this to actually be able to navigate from instructions page, but
+        // you can use back ticks to format stuff (oh so it's like an f-string)
+      //TODO: Fill in the parameters here for a plugin which displays some instructions. 
+      // Tell the participants they will be reading one word at a time, and pressing
+      // the spacebar to advance to the next word. 
+    };
+    timeline.push(instructions);
+
+    // Function to create reading trials for a sentence
+    function createReadingTrials(sentence, sentenceNum, condition) {
+      const trials = [];
+      
+
+      //TODO: Add a trial showing a fixation cross briefly, before each sentence 
+      trials.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<p style="font-size: 48px;">+</p>',
+        choices: "NO_KEYS",
+        trial_duration: 500,
+      })
+
+      //TODO:  Add a trial showing a message telling the participant to press the spacebar to begin the sentence
+      trials.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<p style="font-size: 34px;">Press SPACE to start sentence.</p>',
+        choices: [' '],
+        
+      })
+
+      // Loops over every word in the sentence 
+      // Each word is its own trial 
+      for (let i = 0; i < sentence.length; i++) {
+        trials.push({
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: sentence[i],
+            choices: [' '],
+            data: {
+                sentence: i.sentence,
+                sentenceType: i.type,
+                wordnumber: i,
+                sentencenumber: sentenceNum,
+                condition: condition,
+                
+                //sentencenumber: experimentStimuli.indexOf(sentence),
+
+                //condition: config.condition,
+                //correctResponse: i.correctResponse === 'true' ? 'f' : 'j'
+            },
+          });
+            // TODO: Fill me in the plugin parameters here! 
+            // The plugin should display a word on each trial, 
+            // and then advance to the next word when the spacebar is pressed.
+            // Make sure the trial saves: 
+            // The word displayed & the participant Reaction Time, PLUS:
+            // The number of the sentence and the number of the word in the sentence
+        }
+      
+      return trials;
+    }
+
+    // TODO: Shuffle the presentation order of the sentences 
+    var shuffledStimuli = jsPsych.randomization.shuffle(experimentStimuli);
+    // Add reading trials for each sentence
+    for (let i = 0; i < experimentStimuli.length; i++) {
+      let shuffledSentence = shuffledStimuli[i].sentence
+      let = shuffledCondition = shuffledStimuli[i].condition
+      const readingTrials = createReadingTrials(shuffledSentence, i + 1, shuffledCondition);
+      timeline.push(...readingTrials);
+    }
+
+    // Nice to tell participants they are done, thank you, etc
+    const completion = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<div class="content"><h2>Thank you!</h2>' +
+                '<p>The experiment is now complete.</p>' +
+                '<p>Press the SPACE to see your reading time data.</p></div>',
+      choices: [' ']
+    };
+    timeline.push(completion);
+
+    // This line actually runs the experiment 
+    jsPsych.run(timeline);
+  </script>
+</body>
+</html>
