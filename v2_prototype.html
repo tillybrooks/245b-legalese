@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Language Study</title>
+  <!-- Load JsPsych -->
+  <script src="https://unpkg.com/jspsych@7.3.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-instructions@1.1.4"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
+  <script src="stims.js"></script>
+  <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <script>
+    // Initialize jsPsych
+    const jsPsych = initJsPsych({
+      show_progress_bar: true,
+      on_trial_finish: function() {
+    jsPsych.getDisplayElement().innerHTML = ''; // ← important!
+  },
+        // TB: ok this isn't working for some reason... update it was a missing comma [jsPsych website shows it without a comma; why does that work for them???]
+      on_finish: function() {
+        // Displays data at the end of the experiment
+        // Better to comment out for the real experiment so participants aren't confused
+        jsPsych.data.displayData();
+      }
+    });
+
+    // Simple stimuli for debugging 
+    /*const experimentStimuli = [
+      ["Alice", "met", "Bob"],
+      ["Alice", "and", "Bob", "went", "to", "the", "store"]
+    ];*/
+
+    // We will store each trial in a list called timeline 
+    const timeline = [];
+
+    // Instructions
+    const instructions = {
+      type: jsPsychInstructions,
+      pages: ['<div class="content"><h2>Writing Study</h2>'+ 
+        '<p>In the following screens, you will be asked to write either a fictional story or a law involving a certain crime. </p>'+
+        // the authors have here a prompt to press space to acknowledge understanding of this part of the directions; will incorporate later
+       '<p>Click Next to begin.</p></div>'
+
+        ],
+        show_clickable_nav: true, 
+    };
+    timeline.push(instructions);
+
+/*    const attentionConfirmation = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `
+        <div class="content">
+          <h2>Writing Study</h2>
+          <p>It is important to pay close attention to each trial so that you write in the correct genre.  </p>
+          <p> For the purposes of this experiment, we are interested in how you (as a human) understand and produce text, not how machines do. </p>
+          <p> Because of that, before moving on, in the text below we would like you to promise, in your own words, that you will complete this task on your own and will not consult a language model (such as gpt). </p>
+          <p><strong>Please confirm that you have read and understood these instructions.</p>
+          <textarea id="consent-response" rows="4" cols="50" placeholder="Type here..."></textarea>
+        </div>
+      `,
+      choices: ['Next >'],
+      on_finish: function(data){
+        const typedResponse = document.getElementById('consent-response').value.trim();
+        data.consent_response = typedResponse;
+      }
+    };
+timeline.push(attentionConfirmation); */
+const attentionConfirmation = {
+  type: jsPsychSurveyText,
+  questions: [
+    {
+      prompt: `
+        <div class="content">
+          <h2>Writing Study</h2>
+          <p>It is important to pay close attention to each trial so that you write in the correct genre.  </p>
+          <p> For the purposes of this experiment, we are interested in how you (as a human) understand and produce text, not how machines do. </p>
+          <p> Because of that, before moving on, in the text below we would like you to promise, in your own words, that you will complete this task on your own and will not consult a language model (such as GPT). </p>
+          <p><strong>Please confirm that you have read and understood these instructions:</strong></p>
+        </div>
+      `,
+      rows: 6,
+      columns: 60,
+      required: true
+    }
+  ],
+};
+timeline.push(attentionConfirmation);
+
+
+// cofirmation of role for first trial
+const roleConfirmation = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `
+    <div class="content">
+      <h2>The next of 8 trials is about to begin.</h2>
+      <p>In the following trial, you will be a <strong>fiction writer</strong> and will be asked to write a short story.</p>
+      <p>Please acknowledge that you understand your role by clicking the button below.</p>
+    </div>
+  `,
+  choices: ['I understand'],
+  on_finish: function(data){
+    data.role_confirmed = true;
+    data.role = 'fiction_writer';
+  }
+};
+timeline.push(roleConfirmation);
+
+function createWritingTrial(taskType, crimeDescription) {
+  let taskInstruction = "";
+
+  if (taskType === "fiction_fromscratch") {
+    taskInstruction = "You are a fiction writer. You are tasked with writing a short story about someone who commits a crime and is punished for committing that crime."    
+    + "<br><br>"
+    + " Below are the specifications for the crime. Please write the story, ensuring that it sounds authentic and engaging.";
+  } else if (taskType === "law_fromscratch") {
+    taskInstruction = "You are a lawmaker tasked with writing a law about how to punish a person who commits a crime.";
+  } else if (taskType === "law_editing") {
+    taskInstruction = "After receiving your draft, your fellow lawmakers have requested you include an additional set of specifications for the law. "
+    + "<br><br>"
+    +"Below is the full set of specifications, with new specifications in red. Please edit the law to include the full set of specifications. As before, ensure that it sounds authentic, authoritative and legally binding.";
+  } else if (taskType === "fiction_editing") {
+    taskInstruction = "You are a lawmaker tasked with writing a law about how to punish a person who commits a crime.";
+  }
+  return {
+    type: jsPsychSurveyText,
+    questions: [
+      {
+        prompt: `
+          <div style="text-align: left;">
+            <p>${taskInstruction}</p>
+            <p>Enter your response into the text box below. Below are the specifications for the crime:</p>
+            <div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">
+              ${crimeDescription}
+            </div>
+          </div>
+        `,
+        rows: 8,
+        columns: 70,
+        required: true
+      }
+    ]
+  };
+}
+// These will be used to pre-populate the text box in the second part of the editing condition
+let trial2a_response = "";    
+let previousResponses = {};
+
+// THESE ARE THE CRIME SPECIFICATIONS
+    const crime1_full = `
+<strong>Requirements of guilt for offense:</strong><br>
+&bull; Whoever<br>
+&emsp;&bull; Entering or attempting to enter<br>
+&emsp;&emsp;&bull; A bank credit union, or any savings and loan association<br>
+&emsp;&emsp;&bull; With intent to commit<br>
+&emsp;&emsp;&emsp;&bull; in such bank, credit union or such savings and loan association<br>
+&emsp;&emsp;&emsp;&bull; Any felony<br>
+&emsp;&emsp;&emsp;&emsp;&bull; affecting such bank, credit union or such savings and loan association <br>
+&emsp;&emsp;&emsp;&emsp;&bull; And in violation of any statute of any statute of the united states, or any larceny <br>
+<br><strong>Punishment of offense:</strong><br>
+&bull; 20 years in prison
+`;
+
+    const crime2_partial = `
+<strong>Requirements of guilt for offense:</strong><br>
+&bull; Any person who<br>
+&emsp;&bull; Operates a vehicle<br>
+&emsp;&emsp;&bull; While under the influence of marijuana<br>
+<br><strong>Punishment of offense:</strong><br>
+&bull; Fine of $5000
+`;
+
+const crime2_revised = `
+<strong>Requirements of guilt for offense:</strong><br>
+&bull; Any person who<br>
+&emsp;<span style="color: red;">&bull; Upon any way or in any place where the public has a right of access</span><br>
+&emsp;&bull; Operates a vehicle <span style="color: red;"> or directs the operation of a vehicle</span><br>
+&emsp;&emsp;&bull; While under the influence of marijuana<span style="color: red;">; or <br>
+&emsp;&emsp;&bull; With a percentage, by weight, of alcohol of 8/100 or greater<br></span>
+<br><strong>Punishment of offense:</strong><br>
+&bull; Fine of $5000 <span style="color: red;">  and 2.5 years in prison </span>
+`;
+
+const crime3 = `
+<strong>Requirements of guilt for offense:</strong><br>
+&bull; Any person <br>
+&emsp;&bull; Who trafficks in marijuana <br>
+&emsp;&bull; By knowingly or intentionally:<br>
+&emsp;&emsp;&bull; manufacturing, distributing, dispensing, or cultivating; or <br>
+&emsp;&emsp;&bull; possessing with intent to manufacture, distribute, dispense, or cultivate; or <br>
+&emsp;&emsp;&bull; By bringing into the commonwealth <br>
+&emsp;&bull; A net weight of fifty pounds or more of any mixture containing marijuana <br>
+<br><strong>Punishment of offense:</strong><br>
+&bull; Not less than two and one-half nor more than fifteen years in prison
+`;
+
+
+// TRIAL1: fiction, from scratch
+const trial1 = createWritingTrial("fiction_fromscratch", crime1_full);
+timeline.push(trial1);
+
+
+// TRIAL2: law, editing (but this is the first part, so will use fromscratch instructions and then supply partial stimulus)
+
+// Role confirmation for trial 2; 
+const roleConfirmation2 = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `
+    <div class="content">
+      <h2>The next of 8 trials is about to begin.</h2>
+      <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+      <p>Please acknowledge that you understand your role by clicking the button below.</p>
+    </div>
+  `,
+  choices: ['I understand'],
+  on_finish: function(data){
+    data.role_confirmed = true;
+    data.role = 'lawmaker';
+  }
+};
+timeline.push(roleConfirmation2);
+
+
+//const trial2a = createWritingTrial("law_fromscratch", crime2_partial);
+const trial2a = {
+  ...createWritingTrial("law_fromscratch", crime2_partial),
+  on_finish: function(data) {
+  previousResponses["trial2a"] = data.response.Q0;
+}
+};
+timeline.push(trial2a);
+
+/*
+const trial2b = createWritingTrial("law_editing", crime2_revised);
+timeline.push(trial2b); */
+const trial2b = {
+  type: jsPsychSurveyText,
+  questions: [
+    {
+      prompt: `
+        <div style="text-align: left;">
+          <p>After receiving your draft, your fellow lawmakers have requested you include an additional set of specifications for the law.</p>
+          <p>Below is the full set of specifications, with new specifications in red. Please edit the law to include the full set of specifications. As before, ensure that it sounds authentic, authoritative, and legally binding.</p>
+          <div style="background-color: #f0f0f0; padding: 10px; border: 1px solid #ccc;">
+            ${crime2_revised}
+          </div>
+        </div>
+      `,
+      rows: 8,
+      columns: 70,
+      required: true,
+      value: function() {
+  return previousResponses["trial2a"] || "";
+}
+    }
+  ]
+};
+timeline.push(trial2b);
+
+// TRIAL3: law, from scratch
+const roleConfirmation3 = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `
+    <div class="content">
+      <h2>The next of 8 trials is about to begin.</h2>
+      <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+      <p>Please acknowledge that you understand your role by clicking the button below.</p>
+    </div>
+  `,
+  choices: ['I understand'],
+  on_finish: function(data){
+    data.role_confirmed = true;
+    data.role = 'lawmaker';
+  }
+};
+timeline.push(roleConfirmation3);
+
+const trial3 = createWritingTrial("law_fromscratch", crime3);
+timeline.push(trial3);
+
+
+
+    // TODO: Shuffle the presentation order of the sentences 
+    var shuffledStimuli = jsPsych.randomization.shuffle(experimentStimuli);
+    // Add reading trials for each sentence
+    for (let i = 0; i < experimentStimuli.length; i++) {
+      let shuffledSentence = shuffledStimuli[i].sentence
+      let = shuffledCondition = shuffledStimuli[i].condition
+      const readingTrials = createWritingTrial("fiction", "test");
+      //timeline.push(...readingTrials);
+    }
+
+    // Nice to tell participants they are done, thank you, etc
+    const completion = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: '<div class="content"><h2>Thank you!</h2>' +
+                '<p>The experiment is now complete.</p>' +
+                '<p>Press the SPACE to see your reading time data.</p></div>',
+      choices: [' ']
+    };
+    timeline.push(completion);
+
+    // This line actually runs the experiment 
+    jsPsych.run(timeline);
+  </script>
+</body>
+</html>

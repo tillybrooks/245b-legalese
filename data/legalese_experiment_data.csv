@@ -1,0 +1,32 @@
+"rt","stimulus","response","trial_type","trial_index","time_elapsed","internal_node_id"
+"1861","<p>Welcome to the experiment!</p>
+                <p>In this task, you will be asked to write either a fictional story or a law based on specifications.</p>
+                <p>Please write in your own words. You will complete 8 trials.</p>
+                <p>Press any key to begin.</p>","m","html-keyboard-response","0","1867","0.0-0.0"
+"1185","<p>Trial 1 of 4</p>
+                   <p>You will be a <strong>lawmaker</strong>.</p>
+                   <p>Press any key to continue.</p>","m","html-keyboard-response","1","3054","0.0-1.0"
+"10902","","{""Q0"":""joqewrho cp ve hhqte ht e iugar ew""}","survey-text","2","13969","0.0-2.0"
+"2115","<p>Additional specifications have been added.</p>
+                     <p>Please edit your previous text accordingly to incorporate these changes.</p>
+                     <p>Press any key to continue.</p>","enter","html-keyboard-response","3","16085","0.0-3.0"
+"11355","","{""Q0"":""jkldsf;haffd saoudaf ps duhudf uu dsap af[""}","survey-text","4","27443","0.0-4.0"
+"1041","<p>Trial 2 of 4</p>
+                   <p>You will be a <strong>fiction author</strong>.</p>
+                   <p>Press any key to continue.</p>","o","html-keyboard-response","5","28486","0.0-5.0"
+"1095","","{""Q0"":""ei fasda""}","survey-text","6","29583","0.0-6.0"
+"3808","<p>Trial 3 of 4</p>
+                   <p>You will be a <strong>fiction author</strong>.</p>
+                   <p>Press any key to continue.</p>","enter","html-keyboard-response","7","33391","0.0-7.0"
+"18565","","{""Q0"":""hoaef egr o uawfe wu i ae""}","survey-text","8","51959","0.0-8.0"
+"1691","<p>Additional specifications have been added.</p>
+                     <p>Please edit your previous text accordingly to incorporate these changes.</p>
+                     <p>Press any key to continue.</p>","enter","html-keyboard-response","9","53653","0.0-9.0"
+"2474","","{""Q0"":""kae9y9tq4 rgu vet""}","survey-text","10","56131","0.0-10.0"
+"1175","<p>Trial 4 of 4</p>
+                   <p>You will be a <strong>lawmaker</strong>.</p>
+                   <p>Press any key to continue.</p>","enter","html-keyboard-response","11","57308","0.0-11.0"
+"2807","","{""Q0"":""gyerty puvt twro i rte""}","survey-text","12","60117","0.0-12.0"
+"1123","<p>Thank you for participating!</p>
+                 <p>Your responses have been saved. You may now close the browser tab.</p>
+                 <p>Press any key to finish.</p>","enter","html-keyboard-response","13","61240","0.0-13.0"

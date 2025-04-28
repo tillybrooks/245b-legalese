@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Legalese Experiment</title>
+  <script src="https://unpkg.com/jspsych@7.3.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.1"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.1"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 20px;
+    }
+    .jspsych-content {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .progress-bar-container {
+      width: 100%;
+      background-color: #ccc;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 20px;
+      background-color: #214d22;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="jspsych-experiment"></div>
+
+  <script>
+    const jsPsych = initJsPsych({
+        show_progress_bar: true,
+      on_finish: function() {
+        jsPsych.data.get().localSave('csv', 'legalese_experiment_data.csv');
+      },
+      //show_progress_bar: true,
+      //auto_update_progress_bar: true
+    });
+
+    const welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `<p>Welcome!</p>
+                <p>In this experiment, you will be asked to write either a fictional story or a law based on specifications provided.</p>
+                <p>Please write in your own words. You will complete 8 trials.</p>
+                <p>Press the SPACE key to begin.</p>`
+    };
+
+    let trials = [
+      {
+        role: "fiction",
+        edit: false,
+        requirements: `Any person required under Title 26 to pay tax who willfully fails to pay tax, make tax returns, keep tax records, or supply such information at the times required by law or regulations.`,
+        punishment: `Fine of $25,000 and 1 year in prison.`
+      },
+      {
+        role: "law",
+        edit: false,
+        requirements: `Whoever, taking an oath before a competent tribunal, states any material matter which they do not believe to be true.`,
+        punishment: `Up to 5 years in prison.`
+      },
+      {
+        role: "law",
+        edit: true,
+        requirements: `Whoever, taking an oath before a competent tribunal,<br><span style='color:red;'> in any case in which a law of the United States authorizes an oath to be administered, that he will testify that any written testimony is true, willfully and contrary to such oath,</span> states any material matter which he does not believe to be true.`,
+        punishment: `Up to 5 years in prison.`
+      },
+      {
+        role: "fiction",
+        edit: true,
+        requirements: `Any person who conducts a financial transaction involving the proceeds of unlawful activity<br><span style='color:red;'> knowing that the property involved represents the proceeds of some form of unlawful activity, intending to violate the Internal Revenue Code, and knowing the transaction is designed to conceal those proceeds</span>.`,
+        punishment: `Fine of $500,000; up to 20 years in prison; or both.`
+      }
+    ];
+
+    trials = jsPsych.randomization.shuffle(trials);
+
+    let timeline = [welcome];
+
+    trials.forEach((trial, idx) => {
+      timeline.push({
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>Trial ${idx + 1} of ${trials.length}</p>
+                   <p>You will be a <strong>${trial.role === "fiction" ? "fiction author" : "lawmaker"}</strong>.</p>
+                   <p>Press SPACE to continue.</p>`,
+        choices: [' '],
+      });
+
+      timeline.push({
+        type: jsPsychSurveyText,
+        preamble: `<p><strong>Requirements of guilt for offense:</strong><br>${trial.requirements}</p>
+                   <p><strong>Punishment:</strong><br>${trial.punishment}</p>`,
+        questions: [{prompt: trial.role === "fiction" ? "Write your story:" : "Write your law:"}]
+      });
+
+      if (trial.edit) {
+        timeline.push({
+          type: jsPsychHtmlKeyboardResponse,
+          stimulus: `<p>Additional specifications have been added.</p>
+                     <p>Please edit your previous text accordingly to incorporate these changes.</p>
+                     <p>Press SPACE to continue.</p>`,
+        choices: [' '],                    // <p>Press any key to continue.</p>`
+        });
+
+        timeline.push({
+          type: jsPsychSurveyText,
+          preamble: `<p><strong>Updated Requirements:</strong><br>${trial.requirements}</p>
+                     <p><strong>Updated Punishment:</strong><br>${trial.punishment}</p>`,
+          questions: [{prompt: trial.role === "fiction" ? "Edit your story:" : "Edit your law:"}]
+        });
+      }
+    });
+
+    timeline.push({
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `<p>Thank you for participating!</p>
+                 <p>Your responses have been saved. You may now close the browser tab.</p>
+                 <p>Press any key to finish.</p>`
+    });
+
+    jsPsych.run(timeline);
+  </script>
+
+</body>
+</html>
