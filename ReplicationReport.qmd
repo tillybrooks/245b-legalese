@@ -1,6 +1,6 @@
 ---
-title: "Replication of Study X by Sample & Sample (20xx, Psychological Science)"
-author: "Replication Author[s] (contact information)"
+title: "Replication of Martínez et al. (2024)"
+author: "Tilly Brooks (teb44@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -12,11 +12,14 @@ format:
 
 ## Introduction
 
-basically this is where the info you shared in your lightning talk would go
+In their 2024 article "Even laypeople use legalese," Martínez et al. (2024) run two experiments to better understand why legal language ("legalese") is so complex, as measured through the use of center-embedding.  Martínez et al. test two hypotheses about the complexity of legal language, the magic spell hypothesis and the copy-and-edit hypothesis.  The magic spell hypothesis posits that legalese is purposefully written in a complex manner to give it a “ritualistic, spell-like element” as a performative utterance.  The copy-and-edit hypothesis proposes that legalese is complex because it is the product of an iterative writing process in which additional information is inserted into existing sentences rather than added in separate ones.  Across two production experiments, participants without legal training were tasked with writing stories, laws, and unoffical descriptions about crimes from scratch and in a step-by-step writing and editing process.  The authors find that laypeople use more center-embedded syntax when writing legal texts, but that content produced through a writing and editing process  does not not contain more center-embedded syntax than content produced all at once.  These findings are consistent with the authors' magic spell hypothesis but do not support the copy-and-edit hypothesis.  
 
-In their 2024 article "Even laypeople use legalese," Martínez et al. (2024) run two experiments assessing how laypeople
+In this replication project, I replicate the authors' first experiment which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process.  
+- what phenomenon
+- what they found
+- what you're looking to replicate
+  - whether you expect to see the same thing
 
-[No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information.  It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
 
 
 ## Methods
