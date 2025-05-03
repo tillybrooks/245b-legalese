@@ -14,24 +14,43 @@ format:
 
 In their 2024 article "Even laypeople use legalese," Martínez et al. (2024) run two experiments to better understand why legal language ("legalese") is so complex, as measured through the use of center-embedding.  Martínez et al. test two hypotheses about the complexity of legal language, the magic spell hypothesis and the copy-and-edit hypothesis.  The magic spell hypothesis posits that legalese is purposefully written in a complex manner to give it a “ritualistic, spell-like element” as a performative utterance.  The copy-and-edit hypothesis proposes that legalese is complex because it is the product of an iterative writing process in which additional information is inserted into existing sentences rather than added in separate ones.  Across two production experiments, participants without legal training were tasked with writing stories, laws, and unoffical descriptions about crimes from scratch and in a step-by-step writing and editing process.  The authors find that laypeople use more center-embedded syntax when writing legal texts, but that content produced through a writing and editing process  does not not contain more center-embedded syntax than content produced all at once.  These findings are consistent with the authors' magic spell hypothesis but do not support the copy-and-edit hypothesis.  
 
-In this replication project, I replicate the authors' first experiment which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process.  
-- what phenomenon
-- what they found
-- what you're looking to replicate
-  - whether you expect to see the same thing
-
+In this replication project, I replicate the authors' first experiment which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process.  I aim to replicate the finding that it is genre, not writing process which motivates drafters of legal language to use complex language. 
 
 
 ## Methods
 
-Participants read
+The experiment uses a within-subject design in which participants are instructed to (1) pretend they are fiction authors and write a story about a person who commits a specific crime; and (2) pretend they are lawmakers and write a draft law about a specific crime.  As an additional manipulation, participants are instructed to write from scratch (the "from scratch condition") in half of their trials and in an editing process (the "editing condition") in the other half.  In both processes, participants are  instructed to write a law or story based on provided specifications.  After completing their law or story, participants move on to the next page.  In the from scratch condition, participants move on to the next trial.  In the editing condition, participants are informed that their editor (if in the story condition) or their fellow lawmakers (if in the legal codition) has requested that they revise their original draft and are given additional specifications to incorporate into their draft.  
+
 ### Power Analysis
-The authors report an odds ratio of 8.3 for 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+The authors report an odds ratio of 8.3 for their experiment.  Given this, a sample of approximately 52 would be needed to achieve 80% power, a sample of approximately 68 would be needed to achieve 90% power, and a sample of approximately 84 would be needed to achieve 95% power.
+
+
+```{r}
+
+your_d = log(8.3)*((sqrt(3))/pi)
+# For t-tests
+pwr.t.test(d = your_d, sig.level = 0.05, power = 0.80, type = "two.sample", 
+           alternative = "two.sided")
+```
+```{r}
+
+your_d = log(8.3)*((sqrt(3))/pi)
+# For t-tests
+pwr.t.test(d = your_d, sig.level = 0.05, power = 0.90, type = "two.sample", 
+           alternative = "two.sided")
+```
+```{r}
+
+your_d = log(8.3)*((sqrt(3))/pi)
+# For t-tests
+pwr.t.test(d = your_d, sig.level = 0.05, power = 0.95, type = "two.sample", 
+           alternative = "two.sided")
+```
+
 
 ### Planned Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+In order to achieve 80% power and account for the possibility of participants dropping out, The planned sample size for this project is 60.  Participants will be recruited on the platform Prolific.
 
 ### Materials
 
@@ -51,7 +70,6 @@ Can also quote directly, though it is less often spelled out effectively for an 
 
 Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
 
-STOP WRIING HERE
 
 ### Methods Addendum (Post Data Collection)
 
