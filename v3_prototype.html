@@ -40,7 +40,7 @@
   const instructions = {
     type: jsPsychInstructions,
     pages: ['<div class="content"><h2>Writing Study</h2>'+ 
-      '<p>In the following screens, you will be asked to write either a fictional story or a law involving a certain crime. </p>'+
+      '<p>In the following screens, you will be asked to write either a guide for tourists or a law involving a certain crime. </p>'+
     '<p>Click Next to begin.</p></div>'
 
       ],
@@ -74,22 +74,22 @@
   function createWritingTrial(taskType, crimeDescription, trialNum = null, conditionLabel = null) {
     let taskInstruction = "";
 
-    if (taskType === "fiction_fromscratch") {
-      taskInstruction = "You are a fiction writer. You are tasked with writing a short story about someone who commits a crime and is punished for committing that crime."    
+    if (taskType === "tourguide_fromscratch") {
+      taskInstruction = "You are a <strong>tour guide</strong>, working in a country with strict crime laws. In order to raise awareness among your foreign customers of the crime laws, you are tasked with writing a description of the precondition for a particular crime in your country, as well as the punishment for committing that crime."    
       + "<br>"
-      + " Below are the specifications for the crime. Please write the story, ensuring that it sounds authentic and engaging.";
+      + " Below are the specifications for the crime. Please write the story, ensuring that it is comprehensive and accurate.";
     } else if (taskType === "law_fromscratch") {
-      taskInstruction = "You are a lawmaker.  You are tasked with writing a law that prohibits a certain crime, and specifies the punishment for that crime if the crime is committed."
+      taskInstruction = "You are a <strong>lawmaker</strong>.  You are tasked with writing a law that prohibits a certain crime, and specifies the punishment for that crime if the crime is committed."
       + "<br>"
       +"Below are the specifications for the law. Please write the law, ensuring that it sounds authentic, authoritative and legally binding.";
     } else if (taskType === "law_editing") {
       taskInstruction = "After receiving your draft, your fellow lawmakers have requested you include an additional set of specifications for the law. "
       + "<br>"
       +"Below is the full set of specifications, with new specifications in red. Please edit the law to include the full set of specifications. As before, ensure that it sounds authentic, authoritative and legally binding.";
-    } else if (taskType === "fiction_editing") {
-      taskInstruction = "It turns out that after writing the story, your editors have requested some additional specifications for the story. Those additional specifications are highlighted in red below."
+    } else if (taskType === "tourguide_editing") {
+      taskInstruction = "It turns out that after writing the description, your supervisors have requested some additional specifications for the guide. Those additional specifications are highlighted in red below."
       +"<br>"
-      +"Please edit the story to incorporate those additional specifications, again ensuring that it sounds authentic and engaging.";
+      +"Please edit the description to incorporate those additional specifications, again ensuring that it is comprehensive and accurate.";
     }
     return {
       type: jsPsychSurveyHtmlForm,
@@ -103,7 +103,7 @@
             </div>
           `,
       html: function() {
-        var last_trial_text = taskType == 'law_editing' || taskType == 'fiction_editing' ? jsPsych.data.get().last(1).values()[0].response.response : ''
+        var last_trial_text = taskType == 'law_editing' || taskType == 'tourguide_editing' ? jsPsych.data.get().last(1).values()[0].response.response : ''
         return `<p><textarea cols="70" rows="8" type="text" id="test-resp-box" name="response" size="10" value="placeholder">${last_trial_text}</textarea></p>`
       },
       data: {
@@ -255,21 +255,21 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
-        <p>In the following trial, you will be a <strong>fiction writer</strong> and will be asked to write a short story.</p>
+        <h2>The first of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
     `,
     choices: ['I understand'],
     on_finish: function(data){
       data.role_confirmed = true;
-      data.role = 'fiction_writer';
+      data.role = 'tourguide';
     }
   };
   timeline.push(roleConfirmation1);
 
   // // trial 1
-  const trial1 = createWritingTrial("fiction_fromscratch", crime1_full, 1, "fiction, from scratch");
+  const trial1 = createWritingTrial("tourguide_fromscratch", crime1_full, 1, "tour guide, from scratch");
   timeline.push(trial1);
 
 
@@ -280,7 +280,7 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
+        <h2>The next of 7 remaining trials is about to begin.</h2>
         <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
@@ -311,7 +311,7 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
+        <h2>The next of 6 remaining trials is about to begin.</h2>
         <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
@@ -335,24 +335,24 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
-        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <h2>The next of 5 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
     `,
     choices: ['I understand'],
     on_finish: function(data){
       data.role_confirmed = true;
-      data.role = 'fiction_writer';
+      data.role = 'tourguide';
     }
   };
   timeline.push(roleConfirmation4);
 
   //partial draft first
-  const trial4a = createWritingTrial("fiction_fromscratch",crime4_partial, 4, "fiction, editing");
+  const trial4a = createWritingTrial("tourguide_fromscratch",crime4_partial, 4, "tour guide, editing");
   timeline.push(trial4a);
 
-  const trial4b = createWritingTrial("fiction_editing",crime4_revised, 4, "fiction, editing");
+  const trial4b = createWritingTrial("tourguide_editing",crime4_revised, 4, "tour guide, editing");
   timeline.push(trial4b);
 
   // **************************************************** TRIAL 5: STORY, FROM SCRATCH ****************************************************
@@ -360,21 +360,21 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
-        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <h2>The next of 4 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
     `,
     choices: ['I understand'],
     on_finish: function(data){
       data.role_confirmed = true;
-      data.role = 'fiction_writer';
+      data.role = 'tourguide';
     }
   };
   timeline.push(roleConfirmation5);
 
   // trial 5
-  const trial5 = createWritingTrial("fiction_fromscratch", crime5, 5, "fiction, from scratch");
+  const trial5 = createWritingTrial("tourguide_fromscratch", crime5, 5, "tour guide, from scratch");
   timeline.push(trial5);
 
   // **************************************************** TRIAL 6: LAW, EDITING  ****************************************************
@@ -382,7 +382,7 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
+        <h2>The next of 3 remaining trials is about to begin.</h2>
         <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
@@ -410,7 +410,7 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
+        <h2>The next of 2 remaining trials is about to begin.</h2>
         <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
@@ -432,21 +432,21 @@
     type: jsPsychHtmlButtonResponse,
     stimulus: `
       <div class="content">
-        <h2>The next of 8 trials is about to begin.</h2>
-        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <h2>The final trial is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
         <p>Please acknowledge that you understand your role by clicking the button below.</p>
       </div>
     `,
     choices: ['I understand'],
     on_finish: function(data){
       data.role_confirmed = true;
-      data.role = 'fiction_writer';
+      data.role = 'tourguide';
     }
   };
   timeline.push(roleConfirmation8);
 
   // trial 8
-  const trial8 = createWritingTrial("fiction_fromscratch", crime8, 8, "fiction, from scratch");
+  const trial8 = createWritingTrial("tourguide_fromscratch", crime8, 8, "tour guide, from scratch");
   timeline.push(trial8);
 
       /* TODO: Shuffle the presentation order of the sentences 
@@ -464,6 +464,7 @@
         type: jsPsychHtmlKeyboardResponse,
         stimulus: '<div class="content"><h2>Thank you!</h2>' +
                   '<p>The experiment is now complete.</p>'+
+                  '<p> Please wait for the data to save before closing this tab.</p>'+
                   '<p>Press SPACE to finalize.</p>',
         choices: [' ']
       };
