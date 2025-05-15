@@ -12,6 +12,8 @@
     <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.1.0"></script>
     <script src="stims.js"></script>
     <link href="https://unpkg.com/jspsych@7.3.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+
   </head>
   <body>
     <script>
@@ -35,15 +37,129 @@
 
   // timeline for trials
   const timeline = [];
+  
+  /*consent
+  const consent = {
+  type: jsPsychInstructions,
+  pages: ['<div class="content"><h2 >Consent </h2>' +
+    `<p style="text-align: left;">  Protocol Director: <strong>Robert Hawkins</strong> <br>
+Protocol Title:  <strong>Communication and social cognition in natural audiovisual
+contexts </strong><br>
+IRB# <strong>77226</strong><br>
+<strong>DESCRIPTION:</strong> You are invited to participate in a research study about language and
+communication. The purpose of the research is to understand how you interact and
+communicate with other people in naturalistic settings as a fluent English speaker. This
+research will be conducted through the Prolific platform, including participants from the
+US, UK, and Canada. If you decide to participate in this research, you will play a
+communication game in a group with one or more partners.<br>
+<strong>TIME INVOLVEMENT:</strong> The task will last the amount of time advertised on Prolific. You
+are free to withdraw from the study at any time.<br>
+<strong>RISKS AND BENEFITS:</strong> You may become frustrated if your partner gets distracted, or
+experience discomfort if other participants in your group send text that is inappropriate
+for the task. We ask you to please be respectful of other participants you might be
+interacting with to mitigate these risks. You may also experience discomfort when being
+asked to discuss or challenge emotionally salient political beliefs. Study data will be
+stored securely, in compliance with Stanford University standards, minimizing the risk of
+confidentiality breach. This study advances our scientific understanding of how people
+communication and collaborate in naturalistic settings. This study may lead to further
+insights about what can go wrong in teamwork, suggest potential interventions to
+overcome these barriers, and help to develop assistive technologies that collaborate with
+human partners. <strong>We cannot and do not guarantee or promise that you will
+receive any benefits from this study.</strong><br>
+<strong>PAYMENTS:</strong> You will receive payment in the amount advertised on Prolific. If you do not
+complete this study, you will receive prorated payment based on the time that you have
+spent. Additionally, you may be eligible for bonus payments as described in the
+instructions.<br>
+<strong>PARTICIPANT’S RIGHTS:</strong> If you have read this form and have decided to participate in
+this project, please understand <strong>your participation is voluntary</strong> and you have the <strong>right
+to withdraw your consent or discontinue participation at any time without
+penalty or loss of benefits to which you are otherwise entitled. The alternative
+is not to participate.</strong> You have the right to refuse to answer particular questions. The
+results of this research study may be presented at scientific or professional meetings or
+published in scientific journals. Your individual privacy will be maintained in all published
+and written data resulting from the study. In accordance with scientific norms, the data
+from this study may be used or shared with other researchers for future research (after
+removing personally identifying information) without additional consent from you.<br>
+<strong>CONTACT INFORMATION: Questions:</strong> If you have any questions, concerns or
+complaints about this research, its procedures, risks and benefits, contact the Protocol
+Director, Robert Hawkins (rdhawkins@stanford.edu, 217-549-6923).<br>
+<strong>Independent Contact:</strong> If you are not satisfied with how this study is being conducted,
+or if you have any concerns, complaints, or general questions about the research or your
+rights as a participant, please contact the Stanford Institutional Review Board (IRB) to
+speak to someone independent of the research team at 650-723-2480 or toll free at 1-
+866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford
+IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306. Please save or print a
+copy of this page for your records. <br>
+<strong>If you agree to participate in this research, please click “continue”.</strong></p>`],
+    button_label_next: "Continue",
+    button_label_previous: "Previous",
+    show_clickable_nav: true
+};
 
-  // Initial instructions
+timeline.push(consent);*/
+
+
+  // initial instructions
   const instructions = {
     type: jsPsychInstructions,
-    pages: ['<div class="content"><h2>Writing Study</h2>'+ 
+    pages: ['<div class="content"><h2 >Consent </h2>' +
+    `<p style="text-align: left;">  Protocol Director: <strong>Robert Hawkins</strong> <br>
+Protocol Title:  <strong>Communication and social cognition in natural audiovisual
+contexts </strong><br>
+IRB# <strong>77226</strong><br>
+<strong>DESCRIPTION:</strong> You are invited to participate in a research study about language and
+communication. The purpose of the research is to understand how you interact and
+communicate with other people in naturalistic settings as a fluent English speaker. This
+research will be conducted through the Prolific platform, including participants from the
+US, UK, and Canada. If you decide to participate in this research, you will play a
+communication game in a group with one or more partners.<br>
+<strong>TIME INVOLVEMENT:</strong> The task will last the amount of time advertised on Prolific. You
+are free to withdraw from the study at any time.<br>
+<strong>RISKS AND BENEFITS:</strong> You may become frustrated if your partner gets distracted, or
+experience discomfort if other participants in your group send text that is inappropriate
+for the task. We ask you to please be respectful of other participants you might be
+interacting with to mitigate these risks. You may also experience discomfort when being
+asked to discuss or challenge emotionally salient political beliefs. Study data will be
+stored securely, in compliance with Stanford University standards, minimizing the risk of
+confidentiality breach. This study advances our scientific understanding of how people
+communication and collaborate in naturalistic settings. This study may lead to further
+insights about what can go wrong in teamwork, suggest potential interventions to
+overcome these barriers, and help to develop assistive technologies that collaborate with
+human partners. <strong>We cannot and do not guarantee or promise that you will
+receive any benefits from this study.</strong><br>
+<strong>PAYMENTS:</strong> You will receive payment in the amount advertised on Prolific. If you do not
+complete this study, you will receive prorated payment based on the time that you have
+spent. Additionally, you may be eligible for bonus payments as described in the
+instructions.<br>
+<strong>PARTICIPANT’S RIGHTS:</strong> If you have read this form and have decided to participate in
+this project, please understand <strong>your participation is voluntary</strong> and you have the <strong>right
+to withdraw your consent or discontinue participation at any time without
+penalty or loss of benefits to which you are otherwise entitled. The alternative
+is not to participate.</strong> You have the right to refuse to answer particular questions. The
+results of this research study may be presented at scientific or professional meetings or
+published in scientific journals. Your individual privacy will be maintained in all published
+and written data resulting from the study. In accordance with scientific norms, the data
+from this study may be used or shared with other researchers for future research (after
+removing personally identifying information) without additional consent from you.<br>
+<strong>CONTACT INFORMATION: Questions:</strong> If you have any questions, concerns or
+complaints about this research, its procedures, risks and benefits, contact the Protocol
+Director, Robert Hawkins (rdhawkins@stanford.edu, 217-549-6923).<br>
+<strong>Independent Contact:</strong> If you are not satisfied with how this study is being conducted,
+or if you have any concerns, complaints, or general questions about the research or your
+rights as a participant, please contact the Stanford Institutional Review Board (IRB) to
+speak to someone independent of the research team at 650-723-2480 or toll free at 1-
+866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford
+IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306. Please save or print a
+copy of this page for your records. <br>
+<strong>If you agree to participate in this research, please click “continue”.</strong></p>`,
+      '<div class="content"><h2>Legal Writing Study</h2>'+ 
+      '<p>In this study, you will be asked to read descriptions of different crimes and asked to write about them in different styles.</p>'+
       '<p>In the following screens, you will be asked to write either a guide for tourists or a law involving a certain crime. </p>'+
-    '<p>Click Next to begin.</p></div>'
+    '<p>Click Continue to begin.</p></div>'
 
       ],
+      button_label_next: "Continue",
+      button_label_previous: "Previous",
       show_clickable_nav: true, 
   };
   timeline.push(instructions);
@@ -54,10 +170,10 @@
       {
         prompt: `
           <div class="content">
-            <h2>Writing Study</h2>
-            <p>It is important to pay close attention to each trial so that you write in the correct genre.  </p>
-            <p> For the purposes of this experiment, we are interested in how you (as a human) understand and produce text, not how machines do. </p>
-            <p> Because of that, before moving on, in the text below we would like you to promise, in your own words, that you will complete this task on your own and will not consult a language model (such as GPT). </p>
+            <h2>Legal Writing Study</h2>
+            <p style="text-align: left;">It is important to pay close attention to each trial so that you write in the correct genre.  </p>
+            <p style="text-align: left;"> For the purposes of this experiment, we are interested in how you (as a human) understand and produce text, not how machines do. </p>
+            <p style="text-align: left;"> Because of that, before moving on, in the text below we would like you to promise, in your own words, that you will complete this task on your own and will not consult a language model (such as GPT). </p>
             <p><strong>Please confirm that you have read and understood these instructions:</strong></p>
           </div>
         `,
@@ -248,7 +364,7 @@
 
   `;
 
-  // **************************************************** TRIAL1: FICTION, FROM SCRATCH ****************************************************
+  // **************************************************** TRIAL1: TOUR GUIDE, FROM SCRATCH ****************************************************
 
   // Cofirmation of role for first trial
   const roleConfirmation1 = {
@@ -328,7 +444,7 @@
   const trial3 = createWritingTrial("law_fromscratch", crime3, 3, "law, from scratch");
   timeline.push(trial3);
 
-  // **************************************************** TRIAL 4; FICTION, EDITING ****************************************************
+  // **************************************************** TRIAL 4; TOUR GUIDE, EDITING ****************************************************
 
   //role confirmation for trial 4
   const roleConfirmation4 = {
@@ -355,7 +471,7 @@
   const trial4b = createWritingTrial("tourguide_editing",crime4_revised, 4, "tour guide, editing");
   timeline.push(trial4b);
 
-  // **************************************************** TRIAL 5: STORY, FROM SCRATCH ****************************************************
+  // **************************************************** TRIAL 5: TOUR GUIDE, FROM SCRATCH ****************************************************
   const roleConfirmation5 = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
@@ -427,7 +543,7 @@
   const trial7 = createWritingTrial("law_fromscratch", crime7, 7,"law, from scratch");
   timeline.push(trial7);
 
-  // **************************************************** TRIAL 8: FICTION, FROM SCRATCH  ****************************************************
+  // **************************************************** TRIAL 8: TOUR GUIDE, FROM SCRATCH  ****************************************************
   const roleConfirmation8 = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
