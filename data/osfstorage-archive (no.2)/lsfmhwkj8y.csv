@@ -1,0 +1,71 @@
+"view_history","rt","trial_type","trial_index","time_elapsed","internal_node_id","response","stimulus","role_confirmed","role","trial_number","condition"
+"[{""page_index"":0,""viewing_time"":29899},{""page_index"":1,""viewing_time"":24224}]","54124","instructions","0","54148","0.0-0.0","","","","","",""
+"","71866","survey-text","1","126034","0.0-1.0","{""Q0"":""i promise to use my own knowledge and not rely on AI""}","","","","",""
+"","10333","html-button-response","2","136370","0.0-2.0","0","
+      <div class=""content"">
+        <h2>The first of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","776332","survey-html-form","3","912706","0.0-3.0","{""response"":""in our country,we take financial institutionsecurity very seriously. one specific crime that visitors must be aware of involves unlawfully entering or attempting to enter a bank, credit unions or savings and loan association with criminal intent.Specifically, if a person enters or tries to enter any such financial institution with the intentention of commmitting a felony is considered a serious offense.commiting this crime may lead to 20 years inside jail walls""}","","","","1","tour guide, from scratch"
+"","9840","html-button-response","4","922548","0.0-4.0","0","
+      <div class=""content"">
+        <h2>The next of 7 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","216973","survey-html-form","5","1139524","0.0-5.0","{""response"":""any person caught or booked for operating a vehicle while under the influence of marijuana has to be fined $5000 ""}","","","","2","law, editing"
+"","332568","survey-html-form","6","1472094","0.0-6.0","{""response"":""any person who upon any way or in any place where the public has a right of access caught or booked for operating or directs the operation of a vehicle while under the influence of marijuana or with a percentage,by weight,of alcohol of 8% or greater has to be fined $5000 and two and a half years in prison ""}","","","","2","law, editing"
+"","6868","html-button-response","7","1478963","0.0-7.0","0","
+      <div class=""content"">
+        <h2>The next of 6 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","302225","survey-html-form","8","1781190","0.0-8.0","{""response"":""any person caught in possesion of marijuana with a net weight of fifty pounds or more is entitled to a jail sentence of not less than two and one half nor more than fifteen years in prison ""}","","","","3","law, from scratch"
+"","7748","html-button-response","9","1788940","0.0-9.0","0","
+      <div class=""content"">
+        <h2>The next of 5 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","203964","survey-html-form","10","1992905","0.0-10.0","{""response"":""any person who conducts any illegal transactions with the intent to carry out an unlawful activity is bound for a $500000 fine""}","","","","4","tour guide, editing"
+"","347048","survey-html-form","11","2339956","0.0-11.0","{""response"":""any person who conducts any illegal transactions with the knowledge of the unlawful transaction with the intent to carry out an unlawful activity with intent to engage in conduct constituting a violation of the internal code nad knowing that the transaction is designed to conceal the proceeds of unlawful activity is bound for a $500000 fine or upto twenty years in prison or both""}","","","","4","tour guide, editing"
+"","9538","html-button-response","12","2349496","0.0-12.0","0","
+      <div class=""content"">
+        <h2>The next of 4 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","140220","survey-html-form","13","2489719","0.0-13.0","{""response"":""any person that sets fire to burn any dwelling place, whether occupied or not, is set for a jail tie of upto 25 years ""}","","","","5","tour guide, from scratch"
+"","6374","html-button-response","14","2496095","0.0-14.0","0","
+      <div class=""content"">
+        <h2>The next of 3 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","103785","survey-html-form","15","2599882","0.0-15.0","{""response"":""any citizen who fails to pay tax is set for a fine of $25000 and 1 yearin prison""}","","","","6","law, editing"
+"","172862","survey-html-form","16","2772746","0.0-16.0","{""response"":""any citizen required under title 26 to pay tax and fails to pay tax,make tax returns,keep tax records or submit their data is set for a fine of $25000 and 1 year in prison""}","","","","6","law, editing"
+"","2119","html-button-response","17","2774867","0.0-17.0","0","
+      <div class=""content"">
+        <h2>The next of 2 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","134778","survey-html-form","18","2909646","0.0-18.0","{""response"":""any person who takes an oath before any tribunal is set to a jail time of upto 5 years""}","","","","7","law, from scratch"
+"","5043","html-button-response","19","2914691","0.0-19.0","0","
+      <div class=""content"">
+        <h2>The final trial is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","112117","survey-html-form","20","3026809","0.0-20.0","{""response"":""any person caught corrupting any public official is set to 2 years in prison""}","","","","8","tour guide, from scratch"
+"","7764","html-keyboard-response","21","3034579","0.0-21.0"," ","<div class=""content""><h2>Thank you!</h2><p>The experiment is now complete.</p><p> Please wait for the data to save before closing this tab.</p><p>Press SPACE to finalize.</p>","","","",""

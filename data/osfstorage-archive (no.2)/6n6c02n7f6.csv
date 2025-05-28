@@ -1,0 +1,71 @@
+"view_history","rt","trial_type","trial_index","time_elapsed","internal_node_id","response","stimulus","role_confirmed","role","trial_number","condition"
+"[{""page_index"":0,""viewing_time"":44756},{""page_index"":1,""viewing_time"":11024}]","55781","instructions","0","55809","0.0-0.0","","","","","",""
+"","37419","survey-text","1","93246","0.0-1.0","{""Q0"":""I have read and understood these instructions.""}","","","","",""
+"","7582","html-button-response","2","100833","0.0-2.0","0","
+      <div class=""content"">
+        <h2>The first of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","223146","survey-html-form","3","323985","0.0-3.0","{""response"":""If you would like to avoid spending the next 20 years I prison, this is something you should be aware of:\nWhoever enter or attempt to enter any bank, credit union or savings and loan with intent to commit in such place any felony subject to 20 years imprisonment.""}","","","","1","tour guide, from scratch"
+"","5228","html-button-response","4","329215","0.0-4.0","0","
+      <div class=""content"">
+        <h2>The next of 7 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","101994","survey-html-form","5","431211","0.0-5.0","{""response"":""Any person who operates a vehicle while under the influence of marijuana shall receive a fine of $5000.""}","","","","2","law, editing"
+"","196290","survey-html-form","6","627504","0.0-6.0","{""response"":""Any person \nwho operates a vehicle or directs the operation of a vehicle \nupon or in any public space \nwhile under the influence of marijuana \nor with a percentage, by weight, of alcohol 8/100 or greater\nshall receive a fine of $5000 and 2.5 years in prison.""}","","","","2","law, editing"
+"","3909","html-button-response","7","631415","0.0-7.0","0","
+      <div class=""content"">
+        <h2>The next of 6 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","249903","survey-html-form","8","881320","0.0-8.0","{""response"":""Any person who trafficks in marijuana\nby knowingly or intentionally manufacturing, distributing, dispensing, or cultivating; or possessing with intent to do the above; by bringing into the Commonwealth a weight of 50 pounds or more of any mixture containing marijuana. Punished by not less then 2.5 no more than 15 years in prison.""}","","","","3","law, from scratch"
+"","2575","html-button-response","9","883897","0.0-9.0","0","
+      <div class=""content"">
+        <h2>The next of 5 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","140349","survey-html-form","10","1024249","0.0-10.0","{""response"":""Save yourself $500,000\nDo not conduct a financial transaction which involves the proceeds of unlawful activity, with the intent to carry out specified unlawful activity. Fine of $500,000.""}","","","","4","tour guide, editing"
+"","277962","survey-html-form","11","1302213","0.0-11.0","{""response"":""Save yourself $500,000\nDo not conduct a financial transaction which involves the proceeds of unlawful activity, with the intent to carry out specified unlawful activity, with intent to engage in conduct constituting a violation of the Internal Revenue Code and knowing that the transaction is designed to conceal the proceeds of unlawful activity.:  or know that the property involved in a financial transaction represents the proceeds of some form of unlawful activity.Fine of $500,00 and/or up to 20 years prison.""}","","","","4","tour guide, editing"
+"","3129","html-button-response","12","1305344","0.0-12.0","0","
+      <div class=""content"">
+        <h2>The next of 4 remaining trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","217522","survey-html-form","13","1522868","0.0-13.0","{""response"":""Any person who within the U.S willfully and maliciously; or while in the commission of any felony  sets fire to or burns any dwelling, whether occupied or not  OR any structure where persons are normally present OR any other structure known to be occupied...will be punished up to 25 years in prison.""}","","","","5","tour guide, from scratch"
+"","2869","html-button-response","14","1525740","0.0-14.0","0","
+      <div class=""content"">
+        <h2>The next of 3 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","64301","survey-html-form","15","1590044","0.0-15.0","{""response"":""Any person who willfully fails to pay tax is subject to a fine of $25,000 and 1 year in prison.""}","","","","6","law, editing"
+"","110352","survey-html-form","16","1700398","0.0-16.0","{""response"":""Any person required under Title 26 to pay tax who willfully fails to pay tax, make tax returns, keep tax records or supply such information at the times required by law or regulations is subject to a fine of $25,000 and 1 year in prison.""}","","","","6","law, editing"
+"","1960","html-button-response","17","1702360","0.0-17.0","0","
+      <div class=""content"">
+        <h2>The next of 2 remaining trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","191818","survey-html-form","18","1894180","0.0-18.0","{""response"":""Whoever  taking an oath before a competent tribunal in any case in which a law of the U.S. authorizes and oath to be administered that he will testify that any written testimony is true willfully and contrary to such oath states any material matter which he does not believe to be true. Subject to penalty of up to 5 years in prison.""}","","","","7","law, from scratch"
+"","1868","html-button-response","19","1896051","0.0-19.0","0","
+      <div class=""content"">
+        <h2>The final trial is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>tour guide </strong> and will be asked to write a description for your foreign customers.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","tourguide","",""
+"","77732","survey-html-form","20","1973785","0.0-20.0","{""response"":""Whoever corruptly gives, offers or promises anything of value to any public official shall be imprisoned up to 2 years.""}","","","","8","tour guide, from scratch"
+"","5183","html-keyboard-response","21","1978971","0.0-21.0"," ","<div class=""content""><h2>Thank you!</h2><p>The experiment is now complete.</p><p> Please wait for the data to save before closing this tab.</p><p>Press SPACE to finalize.</p>","","","",""

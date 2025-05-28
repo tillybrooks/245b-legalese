@@ -1,0 +1,71 @@
+"view_history","rt","trial_type","trial_index","time_elapsed","internal_node_id","response","stimulus","role_confirmed","role","trial_number","condition"
+"[{""page_index"":0,""viewing_time"":1145}]","1145","instructions","0","1147","0.0-0.0","","","","","",""
+"","2013","survey-text","1","3163","0.0-1.0","{""Q0"":""test""}","","","","",""
+"","704","html-button-response","2","3868","0.0-2.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong>fiction writer</strong> and will be asked to write a short story.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","fiction_writer","",""
+"","1734","survey-html-form","3","5603","0.0-3.0","{""response"":""dfasds""}","","","","1","fiction, from scratch"
+"","801","html-button-response","4","6404","0.0-4.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","1518","survey-html-form","5","7922","0.0-5.0","{""response"":""ssafddsaadaf""}","","","","2","law, editing"
+"","3605","survey-html-form","6","11528","0.0-6.0","{""response"":""ssafddsaadaf\n\ndsfdsfzdsdzfarg""}","","","","2","law, editing"
+"","1128","html-button-response","7","12657","0.0-7.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","1682","survey-html-form","8","14339","0.0-8.0","{""response"":""dfsafdsagsadg""}","","","","3","law, from scratch"
+"","637","html-button-response","9","14977","0.0-9.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","fiction_writer","",""
+"","1415","survey-html-form","10","16393","0.0-10.0","{""response"":""fsdaasddsacsdv""}","","","","4","fiction, editing"
+"","4129","survey-html-form","11","20522","0.0-11.0","{""response"":""fsdaasddsacsdv\n\nsadfsadav\nsa\nsdavgr\na\n""}","","","","4","fiction, editing"
+"","1071","html-button-response","12","21593","0.0-12.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","fiction_writer","",""
+"","2726","survey-html-form","13","24319","0.0-13.0","{""response"":""fasdfa\nasdfsad\n""}","","","","5","fiction, from scratch"
+"","693","html-button-response","14","25012","0.0-14.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","2493","survey-html-form","15","27506","0.0-15.0","{""response"":""dfsaasdf\ndfsfda""}","","","","6","law, editing"
+"","4786","survey-html-form","16","32293","0.0-16.0","{""response"":""dfsaasdf\nfsafdsa\ndfsfda\n\nfadsfsadfds""}","","","","6","law, editing"
+"","840","html-button-response","17","33133","0.0-17.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>On the next page you will be a <strong> lawmaker </strong> and prompted to write a law.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","lawmaker","",""
+"","2773","survey-html-form","18","35906","0.0-18.0","{""response"":""fadfdsafda\nasfdfsaadfs""}","","","","7","law, from scratch"
+"","939","html-button-response","19","36846","0.0-19.0","0","
+      <div class=""content"">
+        <h2>The next of 8 trials is about to begin.</h2>
+        <p>In the following trial, you will be a <strong> fiction writer </strong> will be asked to write a short story.</p>
+        <p>Please acknowledge that you understand your role by clicking the button below.</p>
+      </div>
+    ","true","fiction_writer","",""
+"","3448","survey-html-form","20","40295","0.0-20.0","{""response"":""safdasdf\nadsdfasd\nfdfas\nfdasfsd""}","","","","8","fiction, from scratch"
+"","1837","html-keyboard-response","21","42133","0.0-21.0"," ","<div class=""content""><h2>Thank you!</h2><p>The experiment is now complete.</p><p>Press SPACE to finalize.</p>","","","",""
