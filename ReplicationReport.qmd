@@ -50,7 +50,7 @@ pwr.t.test(d = your_d, sig.level = 0.05, power = 0.95, type = "two.sample",
 
 ### Planned Sample
 
-In order to achieve 80% power and account for the possibility of participants dropping out, the planned sample size for this project is 60.  Participants will be recruited on the platform Prolific.
+In order to achieve 80% power and account for the possibility of participants dropping out, The planned sample size for this project is 60.  Participants will be recruited on the platform Prolific.
 
 ### Materials
 
