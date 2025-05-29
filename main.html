@@ -595,30 +595,6 @@ copy of this page for your records. <br>
   };
   timeline.push(save_data);
 
-  function postToGoogleForm(dataString) {
-  // Replace with your form's URL
-  const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLSdYmTlJMENurpBH4_hLINJWOUgNbhd3sUyGRggBtun6cuTk6g/formResponse';
-  // Replace with your field's entry ID
-  const entryID = 'entry.1637145492';
-
-  const formData = new FormData();
-  formData.append(entryID, dataString);
-
-  fetch(formURL, {
-    method: 'POST',
-    mode: 'no-cors', // Google Forms doesn't return CORS headers
-    body: formData
-  });
-}
-
-jsPsych.init({
-  timeline: timeline,
-  on_finish: function() {
-    const csvData = jsPsych.data.get().csv();
-    postToGoogleForm(csvData);
-  }
-});
-
       // This line actually runs the experiment 
       jsPsych.run(timeline);
     </script>
