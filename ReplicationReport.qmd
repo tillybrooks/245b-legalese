@@ -14,19 +14,19 @@ format:
 
 In their 2024 article "Even laypeople use legalese," Martínez et al. (2024) run two experiments to better understand why legal language ("legalese") is so complex, as measured through the use of center-embedding.  Martínez et al. test two hypotheses about the complexity of legal language, the magic spell hypothesis and the copy-and-edit hypothesis.  The magic spell hypothesis posits that legalese is purposefully written in a complex manner to give it a “ritualistic, spell-like element” as a performative utterance.  The copy-and-edit hypothesis proposes that legalese is complex because it is the product of an iterative writing process in which additional information is inserted into existing sentences rather than added in separate ones.  Across two production experiments, participants without legal training were tasked with writing stories, laws, and unoffical descriptions about crimes from scratch and in a step-by-step writing and editing process.  The authors find that laypeople use more center-embedded syntax when writing legal texts, but that content produced through a writing and editing process  does not not contain more center-embedded syntax than content produced all at once.  These findings are consistent with the authors' magic spell hypothesis but do not support the copy-and-edit hypothesis.  
 
-In this replication project, I replicate the authors' first experiment which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process.  I aim to replicate the finding that it is genre, not writing process which motivates drafters of legal language to use complex language. 
+In this replication project, I implement an experiment based on the authors' two experiments which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process.  I aim to replicate the finding that it is genre, not writing process which motivates drafters of legal language to use complex language. In addition, I aim to assess whether linguistic properties other than center-embedding usage vary by genre. 
 
 
 ## Methods
 
-The experiment uses a within-subject design in which participants are instructed to (1) pretend they are fiction authors and write a story about a person who commits a specific crime; and (2) pretend they are lawmakers and write a draft law about a specific crime.  As an additional manipulation, participants are instructed to write from scratch (the "from scratch condition") in half of their trials and in an editing process (the "editing condition") in the other half.  In both processes, participants are  instructed to write a law or story based on provided specifications.  After completing their law or story, participants move on to the next page.  In the from scratch condition, participants move on to the next trial.  In the editing condition, participants are informed that their editor (if in the story condition) or their fellow lawmakers (if in the legal codition) has requested that they revise their original draft and are given additional specifications to incorporate into their draft.  
+The experiment uses a within-subject design in which participants are instructed to (1) pretend they are tour guides and write a summary of a specific criminal statute for visiting tourists; and (2) pretend they are lawmakers and write a draft law about a specific crime.  As an additional manipulation, participants are instructed to write from scratch (the "from scratch condition") in half of their trials and in an editing process (the "editing condition") in the other half.  In both processes, participants are  instructed to write a law or guidebook description based on provided specifications.  After completing their law or story, participants move on to the next page.  In the from scratch condition, participants move on to the next trial.  In the editing condition, participants are informed that their supervisor (if in the tourguide condition) or their fellow lawmakers (if in the legal condition) has requested that they revise their original draft and are given additional specifications to incorporate into their draft.  
 
 ### Power Analysis
 The authors report an odds ratio of 8.3 for their experiment.  Given this, a sample of approximately 52 would be needed to achieve 80% power, a sample of approximately 68 would be needed to achieve 90% power, and a sample of approximately 84 would be needed to achieve 95% power.
 
 
 ```{r}
-
+library(pwr)
 your_d = log(8.3)*((sqrt(3))/pi)
 # For t-tests
 pwr.t.test(d = your_d, sig.level = 0.05, power = 0.80, type = "two.sample", 
@@ -53,33 +53,51 @@ pwr.t.test(d = your_d, sig.level = 0.05, power = 0.95, type = "two.sample",
 In order to achieve 80% power and account for the possibility of participants dropping out, The planned sample size for this project is 60.  Participants will be recruited on the platform Prolific.
 
 ### Materials
+The quoted portions of this section are drawn directly from Martínez et al. (2024).  
+The materials in the experiment consisted of eight items.  Each item consisted of instructions to write a law or guide for tourists describing the details of a specific crime.  For each item, two manipulations were available, genre and sequencing.  The genre manipulation consisted of a legal condition and a tour guide condition.  In the legal condition, participants were asked to write a law matching the provided specifications of a crime.  In the tour guide condition, participants were asked to prepare a visitor's guide describing the contents of the provided specifications of a crime. "Both conditions had an associated cover story explaining the motivation behind the task. In the legal condition, participants were told that they were a 'lawmaker' who was 'tasked with writing a law that prohibits a certain crime, and specifies the punishment for that crime if the crime is committed.'"  In the tour guide condition, participatns were told that they were a 'tour guide working in a country with strict crime laws' who was 'tasked with writing a description of the precondition for a particular crime in your country, as well as the punishment for committing that crime.' 
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+"The second manipulation was sequencing, whose conditions consisted of a from-scratch condition and an editing condition. In the from-scratch condition, the details and propositions of the crime were presented all at once. In the editing condition, in contrast, the propositions were presented in two
+stages. In stage 1 (Fig.3), the version of the crime included within the instructions was paired-down and did not contain all of the propositions. In Stage 2, the version of the crime included all of the propositions, and the instructions directed participants to edit their text so as to include all of the additional instructions (see blue text of Fig. 3)."
 
 ### Procedure	
+The quoted portions of this section are drawn directly from Martínez et al. (2024).  
+"Participants were recruited via the online platform Prolific." I conducted a power analysis based on the findings in Martínez et al. to compute sample size.  Based on this analysis, I determined that a minimum of 52 participants would be necessary to achieve at least 80% power.  In order to accommodate this and account for potential exclusions, I recruited 60 participants.
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+"Participants were eligible if they resided in the United States, were 18 years or older, and native speakers of English. Each participant completed 8 trials of the same series of tasks"
+
+"On a given trial, participants would be presented with materials in one of the four conditions and asked to write either a law or story in accordance with the material’s instructions. As noted above, when in the from-scratch condition, participants were asked to draft their text all at once, whereas in the editing condition, participants were first asked to write an initial draft based on a paired-down version of the crime described, and then subsequently presented with the full version of the crime and asked to edit their draft to incorporate the additional details associated with that version." No participant saw the same item more than once and was presented with each of the four conditions at least once.  Each participant saw One item in the tour guide, editing condition, three items in the tour guide, from scratch condition, two items in the law, editing condition, and two items in the law, from scratch condition.
+
+Before each trial, participants were informed of the genre of the upcoming trial and prompted to confirm that they they understood their role for the trial. "Participants were not allowed to proceed to the trial until answering the comprehension check correctly."
+
+"Prior to completing the first trial, participants were asked to promise that they would not use a language model [such as generative pre-trained transformer (GPT)] to complete the task."
+
+"Participants were retained in the analysis if they completed all trials and were determined not to use a language model in their responses."  Thus 67 out of 70 participants were retained in the final analysis.  Participants from the pilots were also included in the final analysis.
 
 ### Analysis Plan
+Participant responses will be extracted and then analyzed by qualitatively and quantitatively for how *shall* is used.  Quantitative analysis will assess the frequency of *shall* usage by trial.  In the case of trials in the editing condition, only the final response is considered.  Qualitative analysis will consist of analysis of the environments in which *shall* is used.  The effect of the genre manipulation on *shall* usage will be assessed using a random effects poisson regression with frequency of *shall* usage as the outcome variable.  Genre is the fixed effect of interest and random effects consist of participant and item. 
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+I assess the authors's magic spell and copy-and-edit hypotheses.  If the magic spell hypothesis is correct, I expect to find that there is a significant effect of genre on *shall* usage.  If the copy-and-edit hypothesis is correct, I expect to find a significant effect of sequencing on *shall* usage.  In addition to assessing the magic spell and copy-and-edit hypotheses, I assess a *deonticity expressing hypothesis*.  According to this hypothesis, legal language uses *shall* at higher rates than other genres because its function is to describe deontic objects like duties and prohibitions.  If this hypothesis is correct, I expect that there will not be a significant difference in shall usage across the two genres when they are each describing deontic objects.
 
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
 
 ### Differences from Original Study
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+There were a number of differences between this project and the original study.
 
+**Sample Size**: The sample size for the replication project (60 participants recruited) is substantially smaller than that in Martínez et al. 2024 (220 participants recruited).  Based on the power analysis conducted for this project, this smaller sample is sufficient for 80% power.
 
-### Methods Addendum (Post Data Collection)
+**Materials **:  The crime specifications used in this experiment are the same as those used in Martínez et al.'s experiment 1, but the manipulations were different.  First, the genre manipulation involves a legal condition and a tour guide conditino rather than a legal condition and a story condition.  This is the genre manipulation used in Martínez et al.'s second experiment.  Like experiment 1, the sequencing condition is retained, but participants are exposed to one item in the tour guide & editing condition, three items in the tour guide & from scratch condition, two items in the legal & editing condition, and two items in the legal & from scratch condition.  Where the analysis of the replication focuses on genre rather than sequencing, this difference is not anticipated to make a substantial difference in the findings of this project.
 
-You can comment this section out prior to final report with data collection.
+**Procedure **: I did not ask participants to confirm that they did not use a language model at the end of the final trial.  Martínez et al. excluded participants who did not complete all trials or who were determined to have used a language model in their responses.  I retain participants who complete
+
+**Analysis **:  There are two major analytic differences between the original study and this replication project.  First, usage of the modal *shall* is the main focus of analysis rather than center-embedding.  Second, genre is the primary manipulation of interest rather than genre and sequencing (although I still assess the effect of sequencing on *shall* usage). 
+
 
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+  The final sample includes 67 participants.  Three participants were excluded for not completing all trials.
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
+I had to run the main sample twice due to an issue with OSF.  Other than this, there were no differences from the pre-data collection methods plan.
 
 
 ## Results
@@ -87,36 +105,213 @@ You can comment this section out prior to final report with data collection.
 
 ### Data preparation
 
-Data preparation following the analysis plan.
-	
 ```{r include=F}
-### Data Preparation
+# import libraries
+library(tidyverse)
+library(ggthemes)
+library(jsonlite)
+library(purrr)
+library(ggplot2)
+library(lme4)
+# use a nicer theme
+theme_set(theme_few())
 
-#### Load Relevant Libraries and Functions
 
-#### Import data
+#Import data
+
+data_path <- "/Users/tillybrooks/Library/CloudStorage/OneDrive-Stanford/linguistics/spring 2025/psycholinguistics/project_analysis/final_data_v0"
+
+#combining CSVs into a single data frame
+all_data <- list.files(data_path, pattern = "*.csv", full.names = TRUE) %>%
+  map_dfr(read_csv, .id="file", show_col_types = FALSE)
 
 #### Data exclusion / filtering
+#filter trial number so only second part of editing condition shows
+
+all_data <- all_data %>%
+  filter(!(trial_index %in% c(5,10, 15)))
+
+#filter data to exclude test files and participants who did not complete all trials
+all_data <- all_data %>%
+  filter(!(file %in% c(1, 8,19,27,40, 61,62,65)))
 
 #### Prepare data for analysis - create columns etc.
+extract_response <- function(x) {
+  if (is.na(x) || !grepl("\\{\\s*\"response\"\\s*:", x)) return(NA_character_)
+  tryCatch(fromJSON(x)$response, error = function(e) NA_character_)
+}
+
+all_data <- all_data %>%
+  mutate(response = map_chr(response, extract_response))
+
+# filter data to show only responses
+all_data <- all_data %>%
+  filter(trial_type == "survey-html-form")
+
+# add column for genre
+all_data <- all_data %>%
+  mutate(
+    domain = case_when(
+      condition %in% c("law, editing", "law, from scratch") ~ "legal",
+      condition %in% c("tour guide, editing", "tour guide, from scratch") ~ "tourguide",
+      TRUE ~ NA_character_
+    )
+  )
+
+# add column for sequencing
+all_data <- all_data %>%
+  mutate(
+    sequencing = case_when(
+      condition %in% c("tour guide, from scratch", "law, from scratch") ~ "from scratch",
+      condition %in% c("tour guide, editing", "law, editing") ~ "editing",
+      TRUE ~ NA_character_
+    )
+  )
+
+#get total number of shalls used
+shall_count <- all_data %>%
+  filter(!is.na(response)) %>%
+  mutate(num_shall = str_count(response, regex("\\bshall\\b", ignore_case = TRUE))) %>%
+  summarise(total = sum(num_shall))
+
+# add row counting shalls per row
+all_data <- all_data %>%
+  mutate(num_shall = str_count(response, regex("\\bshall\\b", ignore_case = TRUE)))
+
+# remove fiction author rows
+all_data <- all_data %>%
+  filter(!(condition %in% c("fiction, from scratch", "fiction, editing", "NA")))
+
+
 ```
 
 ### Confirmatory analysis
+```{r}
+#get shall count by domain
+shall_by_domain <- all_data %>%
+  group_by(domain) %>%  # or replace `condition` with `role` if more appropriate
+  summarise(total_shall = sum(num_shall, na.rm = TRUE),
+            mean_shall = mean(num_shall, na.rm = TRUE),
+            n = n())
+#shall_by_domain
 
-The analyses as specified in the analysis plan.  
+#get shall count by sequencing
+shall_by_sequencing <- all_data %>%
+  group_by(sequencing) %>%  # or replace `condition` with `role` if more appropriate
+  summarise(total_shall = sum(num_shall, na.rm = TRUE),
+            mean_shall = mean(num_shall, na.rm = TRUE),
+            n = n())
 
-*Side-by-side graph with original graph is ideal here*
+#shall_by_sequencing
+```
+#### Visualizations
+```{r}
+#make a barplot to show shall usage by genre
+all_data %>%
+  filter(!is.na(domain))%>%
+  group_by(domain) %>%
+  summarise(
+    mean_shall = mean(num_shall, na.rm = TRUE),
+    se = sd(num_shall, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = domain, y = mean_shall)) +
+  geom_bar(stat = "identity", fill = "chocolate4") + 
+  geom_errorbar(aes(ymin = mean_shall -se, ymax = mean_shall + se), width = 0.2) +
+  labs(
+    title = "Average use of 'shall' by genre",
+    x = "Condition",
+    y = "Mean number of 'shall' tokens by response"
+  ) +
+  theme_minimal()
 
-### Exploratory analyses
-
-Any follow-up analyses desired (not required).  
+```
+```{r}
+# shall usage by sequencing
+# barplot to show shall usage by sequencing
+all_data %>%
+  filter(!is.na(sequencing))%>%
+  group_by(sequencing) %>%
+  summarise(
+    mean_shall = mean(num_shall, na.rm = TRUE),
+    se = sd(num_shall, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = sequencing, y = mean_shall)) +
+  geom_bar(stat = "identity", fill = "purple") + 
+  geom_errorbar(aes(ymin = mean_shall -se, ymax = mean_shall + se), width = 0.2) +
+  labs(
+    title = "Average use of 'shall' by sequencing",
+    x = "Condition",
+    y = "Mean number of 'shall' tokens by response"
+  ) +
+  theme_minimal()
+```
+```{r}
+#make a barplot to show shall usage by condition
+all_data %>%
+  filter(!is.na(condition))%>%
+  group_by(condition) %>%
+  summarise(
+    mean_shall = mean(num_shall, na.rm = TRUE),
+    se = sd(num_shall, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = condition, y = mean_shall)) +
+  geom_bar(stat = "identity", fill = "plum") + 
+  geom_errorbar(aes(ymin = mean_shall -se, ymax = mean_shall + se), width = 0.2) +
+  labs(
+    title = "Average use of 'shall' by condition",
+    x = "Condition",
+    y = "Mean number of 'shall' tokens by response"
+  ) +
+  theme_minimal()
+```
+These results are similar to Martínez et al.'s findings.  Genre seeems to have a much greater effect on *shall* usage than sequencing.
+![Martínez et al. experiment 1 results](martinez et al. visual.png)
+There is some variation in *shall* usage across trials, but writing in the legal genre uses *shall* at much higher rates than writing in the tour guide genre.
+```{r}
+all_data %>%
+  filter(!is.na(trial_number), !is.na(domain)) %>%
+  group_by(trial_number, domain) %>%
+  summarise(
+    mean_shall = mean(num_shall, na.rm = TRUE),
+    se = sd(num_shall, na.rm = TRUE) / sqrt(n()),
+    .groups = "drop"
+  ) %>%
+  ggplot(aes(x = factor(trial_number), y = mean_shall, color = domain)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean_shall - se, ymax = mean_shall + se), width = 0.2) +
+  labs(
+    title = "'Shall' Usage by Trial (Fixed Domain per Trial)",
+    x = "Trial Number",
+    y = "Mean number of 'shall' tokens",
+    color = "Domain"
+  ) +
+  theme_minimal()
+```
+#### Statistical Models
+There is a significant effect of genre on *shall* usage.
+```{r}
+all_data %>%
+  filter(!is.na(num_shall))%>%
+glmer(num_shall~domain+(1+domain|file)+(1|trial_index), 
+      data=., family = "poisson")%>%
+  summary()
+```
+There is not a significant effect of sequencing on *shall* usage.
+```{r}
+all_data %>%
+  filter(!is.na(num_shall))%>%
+glmer(num_shall~sequencing+(1+domain|file)+(1|trial_index), 
+      data=., family = "poisson")%>%
+  summary()
+```
 
 ## Discussion
 
-### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+### Summary of Replication Attempt
+I find a significant effect of genre on usage of the central modal *shall* in the responses.  This is consistent with Martínez et al.'s finding.  I take this to indicate that support for the authors' conclusion that legalese is convoluted because legal writers want to convey something, not because the conceptual complexity of the genre demands it.  These results are consistent with the magic spell hypothesis and inconsistent with the deonticity expressing and copy-and-edit hypotheses.
+
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+Although the results of the study are consistent with the magic spell hypothesis, an important question remains unanwered: why do the particular strategies we see in legalese (*e.g.*, center-embedding, uncommon modals) seem to make statutes sound more authoritative?  I hypothesize that the markedness of these constructions is the explanation.  It may be the case that the infrequency of shall in other contexts allows it to be easily recognizable as serving a particular function in the legal context.  This is why shall is used in contexts where we might expect to see a more common modal like must.
