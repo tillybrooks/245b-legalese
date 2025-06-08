@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Tilly Brooks (teb44@stanford.edu)">
-<meta name="dcterms.date" content="2025-06-06">
+<meta name="dcterms.date" content="2025-06-07">
 
 <title>Replication of Martínez et al.&nbsp;(2024)</title>
 <style>
@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 6, 2025</p>
+      <p class="date">June 7, 2025</p>
     </div>
   </div>
   
@@ -140,15 +140,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>In their 2024 article “Even laypeople use legalese,” Martínez et al.&nbsp;(2024) run two experiments to better understand why legal language (“legalese”) is so complex, as measured through the use of center-embedding. Martínez et al.&nbsp;test two hypotheses about the complexity of legal language, the magic spell hypothesis and the copy-and-edit hypothesis. The magic spell hypothesis posits that legalese is purposefully written in a complex manner to give it a “ritualistic, spell-like element” as a performative utterance. The copy-and-edit hypothesis proposes that legalese is complex because it is the product of an iterative writing process in which additional information is inserted into existing sentences rather than added in separate ones. Across two production experiments, participants without legal training were tasked with writing stories, laws, and unoffical descriptions about crimes from scratch and in a step-by-step writing and editing process. The authors find that laypeople use more center-embedded syntax when writing legal texts, but that content produced through a writing and editing process does not not contain more center-embedded syntax than content produced all at once. These findings are consistent with the authors’ magic spell hypothesis but do not support the copy-and-edit hypothesis.</p>
-<p>In this replication project, I implement an experiment based on the authors’ two experiments which prompts participants to write stories and laws describing certain crimes from scratch and in an editing process. I aim to replicate the finding that it is genre, not writing process which motivates drafters of legal language to use complex language. In addition, I aim to assess whether linguistic properties other than center-embedding usage vary by genre.</p>
+<p>In their 2024 article “Even laypeople use legalese,” Martínez et al.&nbsp;(2024) run two experiments to better understand why legal language (“legalese”) is so complex, as measured through the use of center-embedding. Martínez et al.&nbsp;test two hypotheses about the complexity of legal language, the magic spell hypothesis and the copy-and-edit hypothesis. The magic spell hypothesis posits that legalese is purposefully written in a complex manner to give it a “ritualistic, spell-like element” as a performative utterance. The copy-and-edit hypothesis proposes that legalese is complex because it is the product of an iterative writing process in which additional information is inserted into existing sentences rather than added in separate ones. Across two production experiments, participants without legal training were tasked with writing stories, laws, and unoffical descriptions about crimes from scratch and in a step-by-step writing and editing process. The authors find that laypeople use more center-embedded syntax when writing legal texts, but that content produced through a writing and editing process does not not contain more center-embedded syntax than content produced all at once. These findings are consistent with the authors’ magic spell hypothesis but do not support the copy-and-edit hypothesis. At a theoretical level, these findings offer support for the view that the linguistic complexity associated with legal language functions as an indicator of the law’s performative effects.</p>
+<p>In this replication project, I implement an experiment which prompts participants to write visitors’ guides and laws describing certain crimes. I aim to replicate the finding that it is genre, not writing process which motivates drafters of legal language to use complex language. In addition, I aim to assess whether usage of a linguistic property other than center-embedding (<em>i.e.</em>, the central modal <em>shall</em>) varies by genre.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>The experiment uses a within-subject design in which participants are instructed to (1) pretend they are tour guides and write a summary of a specific criminal statute for visiting tourists; and (2) pretend they are lawmakers and write a draft law about a specific crime. As an additional manipulation, participants are instructed to write from scratch (the “from scratch condition”) in half of their trials and in an editing process (the “editing condition”) in the other half. In both processes, participants are instructed to write a law or guidebook description based on provided specifications. After completing their law or story, participants move on to the next page. In the from scratch condition, participants move on to the next trial. In the editing condition, participants are informed that their supervisor (if in the tourguide condition) or their fellow lawmakers (if in the legal condition) has requested that they revise their original draft and are given additional specifications to incorporate into their draft.</p>
+<p>The experiment uses a within-subject design in which participants are instructed to (1) pretend they are tour guides and write a summary of a specific criminal statute for visiting tourists; and (2) pretend they are lawmakers and write a draft law about a specific crime. As an additional manipulation, participants are instructed to write from scratch (the “from scratch condition”) in some of their trials and in an editing process (the “editing condition”) in the other trials In both processes, participants are instructed to write a law or guidebook description based on provided specifications describing crimes. After completing their law or guidebook, participants move on to the next page. In the from scratch condition, participants move on to the next trial. In the editing condition, participants are informed that their supervisor (if in the tour guide condition) or their fellow lawmakers (if in the legal condition) has requested that they revise their original draft and are given additional specifications to incorporate into their draft. Participants then revise their original entry to reflect the added specifications.</p>
 <section id="power-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="power-analysis">Power Analysis</h3>
-<p>The authors report an odds ratio of 8.3 for their experiment. Given this, a sample of approximately 52 would be needed to achieve 80% power, a sample of approximately 68 would be needed to achieve 90% power, and a sample of approximately 84 would be needed to achieve 95% power.</p>
+<p>Martínez et al.&nbsp;(2024) report an odds ratio of 8.3 for their experiment. Given this, a sample of approximately 52 would be needed to achieve 80% power, a sample of approximately 68 would be needed to achieve 90% power, and a sample of approximately 84 would be needed to achieve 95% power.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>your_d <span class="ot">=</span> <span class="fu">log</span>(<span class="fl">8.3</span>)<span class="sc">*</span>((<span class="fu">sqrt</span>(<span class="dv">3</span>))<span class="sc">/</span>pi)</span>
@@ -207,36 +207,35 @@ NOTE: n is number in *each* group</code></pre>
 </section>
 <section id="planned-sample" class="level3">
 <h3 class="anchored" data-anchor-id="planned-sample">Planned Sample</h3>
-<p>In order to achieve 80% power and account for the possibility of participants dropping out, The planned sample size for this project is 60. Participants will be recruited on the platform Prolific.</p>
+<p>In order to achieve 80% power and account for the possibility of participants dropping out, the planned sample size for this project is 60. Participants who are native speakers of U.S. English will be recruited on the platform Prolific.</p>
 </section>
 <section id="materials" class="level3">
 <h3 class="anchored" data-anchor-id="materials">Materials</h3>
 <p>The quoted portions of this section are drawn directly from Martínez et al.&nbsp;(2024).<br>
-The materials in the experiment consisted of eight items. Each item consisted of instructions to write a law or guide for tourists describing the details of a specific crime. For each item, two manipulations were available, genre and sequencing. The genre manipulation consisted of a legal condition and a tour guide condition. In the legal condition, participants were asked to write a law matching the provided specifications of a crime. In the tour guide condition, participants were asked to prepare a visitor’s guide describing the contents of the provided specifications of a crime. “Both conditions had an associated cover story explaining the motivation behind the task. In the legal condition, participants were told that they were a ‘lawmaker’ who was ‘tasked with writing a law that prohibits a certain crime, and specifies the punishment for that crime if the crime is committed.’” In the tour guide condition, participatns were told that they were a ‘tour guide working in a country with strict crime laws’ who was ‘tasked with writing a description of the precondition for a particular crime in your country, as well as the punishment for committing that crime.’</p>
+The materials in the experiment consisted of eight items. Each item consisted of instructions to write a law or guide for tourists describing the details of a specific crime. For each item, two manipulations were available, genre and sequencing. The genre manipulation consisted of a legal condition and a tour guide condition. In the legal condition, participants were asked to write a law matching the provided specifications of a crime. In the tour guide condition, participants were asked to prepare a visitors’ guide describing the contents of the provided specifications of a crime. “Both conditions had an associated cover story explaining the motivation behind the task. In the legal condition, participants were told that they were a ‘lawmaker’ who was ‘tasked with writing a law that prohibits a certain crime, and specifies the punishment for that crime if the crime is committed.’” In the tour guide condition, participants were told that they were a “tour guide working in a country with strict crime laws” who was “tasked with writing a description of the precondition for a particular crime in your country, as well as the punishment for committing that crime.”</p>
 <p>“The second manipulation was sequencing, whose conditions consisted of a from-scratch condition and an editing condition. In the from-scratch condition, the details and propositions of the crime were presented all at once. In the editing condition, in contrast, the propositions were presented in two stages. In stage 1 (Fig.3), the version of the crime included within the instructions was paired-down and did not contain all of the propositions. In Stage 2, the version of the crime included all of the propositions, and the instructions directed participants to edit their text so as to include all of the additional instructions (see blue text of Fig. 3).”</p>
 </section>
 <section id="procedure" class="level3">
 <h3 class="anchored" data-anchor-id="procedure">Procedure</h3>
 <p>The quoted portions of this section are drawn directly from Martínez et al.&nbsp;(2024).<br>
-“Participants were recruited via the online platform Prolific.” I conducted a power analysis based on the findings in Martínez et al.&nbsp;to compute sample size. Based on this analysis, I determined that a minimum of 52 participants would be necessary to achieve at least 80% power. In order to accommodate this and account for potential exclusions, I recruited 60 participants.</p>
+“Participants were recruited via the online platform Prolific.” I conducted a power analysis based on the findings in Martínez et al.&nbsp;(2024) to compute sample size. Based on this analysis, I determined that a minimum of 52 participants would be necessary to achieve at least 80% power. In order to accommodate this and account for potential exclusions, I recruited 60 participants.</p>
 <p>“Participants were eligible if they resided in the United States, were 18 years or older, and native speakers of English. Each participant completed 8 trials of the same series of tasks”</p>
 <p>“On a given trial, participants would be presented with materials in one of the four conditions and asked to write either a law or story in accordance with the material’s instructions. As noted above, when in the from-scratch condition, participants were asked to draft their text all at once, whereas in the editing condition, participants were first asked to write an initial draft based on a paired-down version of the crime described, and then subsequently presented with the full version of the crime and asked to edit their draft to incorporate the additional details associated with that version.” No participant saw the same item more than once and was presented with each of the four conditions at least once. Each participant saw One item in the tour guide, editing condition, three items in the tour guide, from scratch condition, two items in the law, editing condition, and two items in the law, from scratch condition.</p>
 <p>Before each trial, participants were informed of the genre of the upcoming trial and prompted to confirm that they they understood their role for the trial. “Participants were not allowed to proceed to the trial until answering the comprehension check correctly.”</p>
 <p>“Prior to completing the first trial, participants were asked to promise that they would not use a language model [such as generative pre-trained transformer (GPT)] to complete the task.”</p>
-<p>“Participants were retained in the analysis if they completed all trials and were determined not to use a language model in their responses.” Thus 67 out of 70 participants were retained in the final analysis. Participants from the pilots were also included in the final analysis.</p>
+<p>“Participants were retained in the analysis if they completed all trials and were determined not to use a language model in their responses.” Thus 67 out of 70 participants were retained in the final analysis.</p>
 </section>
 <section id="analysis-plan" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-plan">Analysis Plan</h3>
-<p>Participant responses will be extracted and then analyzed by qualitatively and quantitatively for how <em>shall</em> is used. Quantitative analysis will assess the frequency of <em>shall</em> usage by trial. In the case of trials in the editing condition, only the final response is considered. Qualitative analysis will consist of analysis of the environments in which <em>shall</em> is used. The effect of the genre manipulation on <em>shall</em> usage will be assessed using a random effects poisson regression with frequency of <em>shall</em> usage as the outcome variable. Genre is the fixed effect of interest and random effects consist of participant and item.</p>
-<p>I assess the authors’s magic spell and copy-and-edit hypotheses. If the magic spell hypothesis is correct, I expect to find that there is a significant effect of genre on <em>shall</em> usage. If the copy-and-edit hypothesis is correct, I expect to find a significant effect of sequencing on <em>shall</em> usage. In addition to assessing the magic spell and copy-and-edit hypotheses, I assess a <em>deonticity expressing hypothesis</em>. According to this hypothesis, legal language uses <em>shall</em> at higher rates than other genres because its function is to describe deontic objects like duties and prohibitions. If this hypothesis is correct, I expect that there will not be a significant difference in shall usage across the two genres when they are each describing deontic objects.</p>
-<p><strong>Clarify key analysis of interest here</strong> You can also pre-specify additional analyses you plan to do.</p>
+<p>Participant responses will be extracted and then analyzed for how <em>shall</em> is used. I will use quantitative analysis to assess the frequency of <em>shall</em> usage by trial and genre. The effect of trial and genre manipulation on <em>shall</em> usage will be assessed using two models: a random effects poisson regression with frequency of <em>shall</em> usage in participant responses as the outcome variable and a random effects logistic regression using the presence or absence of <em>shall</em> as the outcome variable. Genre is the fixed effect of interest and random effects consist of participant and item. Because the primary analysis of interest in this replication is distinct from that in the original paper, this analysis will also be applied Martínez et al.’s (2024) results. In the case of trials in the editing condition, only the final response is considered.</p>
+<p>I assess the authors’ magic spell and copy-and-edit hypotheses. If the magic spell hypothesis is correct, I expect to find that there is a significant effect of genre on <em>shall</em> usage, with <em>shall</em> being used more frequently in the legal condition than the tour guide condition. If the copy-and-edit hypothesis is correct, I expect to find a significant effect of sequencing on <em>shall</em> usage, but relative similarity in <em>shall</em> usage in legal and tour guide trials. In addition to assessing these two hypotheses, I introduce and another hypothesis: the <em>deonticity expressing hypothesis</em>. According to this hypothesis, legal language uses <em>shall</em> at higher rates than other genres because its function is to describe deontic objects like duties and prohibitions. If this hypothesis is correct, I expect that there will not be a significant difference in <em>shall</em> usage across the two genres or sequencing conditions. Rather, they deonticity expressing hypothesis predicts that usage of <em>shall</em> will be relatively high and constant across the four conditions in the experiment because participants will be describing deontic objects in each trial.</p>
 </section>
 <section id="differences-from-original-study" class="level3">
 <h3 class="anchored" data-anchor-id="differences-from-original-study">Differences from Original Study</h3>
 <p>There were a number of differences between this project and the original study.</p>
-<p><strong>Sample Size</strong>: The sample size for the replication project (60 participants recruited) is substantially smaller than that in Martínez et al.&nbsp;2024 (220 participants recruited). Based on the power analysis conducted for this project, this smaller sample is sufficient for 80% power.</p>
-<p><strong>Materials </strong>: The crime specifications used in this experiment are the same as those used in Martínez et al.’s experiment 1, but the manipulations were different. First, the genre manipulation involves a legal condition and a tour guide conditino rather than a legal condition and a story condition. This is the genre manipulation used in Martínez et al.’s second experiment. Like experiment 1, the sequencing condition is retained, but participants are exposed to one item in the tour guide &amp; editing condition, three items in the tour guide &amp; from scratch condition, two items in the legal &amp; editing condition, and two items in the legal &amp; from scratch condition. Where the analysis of the replication focuses on genre rather than sequencing, this difference is not anticipated to make a substantial difference in the findings of this project.</p>
-<p><strong>Procedure </strong>: I did not ask participants to confirm that they did not use a language model at the end of the final trial. Martínez et al.&nbsp;excluded participants who did not complete all trials or who were determined to have used a language model in their responses. I retain participants who complete</p>
+<p><strong>Sample Size</strong>: The sample size for the replication project (60 participants recruited for the main sample) is substantially smaller than that in Martínez et al.&nbsp;2024 (220 participants recruited). Based on the power analysis conducted for this project, this smaller sample is sufficient for 80% power.</p>
+<p><strong>Materials </strong>: The crime specifications used in this experiment are the same as those used in Martínez et al.’s experiment 1, but the manipulations were different. First, the genre manipulation involves a legal condition and a tour guide condition rather than a legal condition and a story condition. This is the genre manipulation used in Martínez et al.’s second experiment. Like experiment 1, the sequencing condition is retained, but participants are exposed to one item in the tour guide &amp; editing condition, three items in the tour guide &amp; from scratch condition, two items in the legal &amp; editing condition, and two items in the legal &amp; from scratch condition. Where the analysis of the replication focuses on genre rather than sequencing, this difference is not anticipated to make a substantial difference in the findings of this project.</p>
+<p><strong>Procedure </strong>: I did not ask participants to confirm that they did not use a language model at the end of the final trial. Martínez et al.&nbsp;excluded participants who did not complete all trials or who were determined to have used a language model in their responses. In addition, the comprehension check between trials in my experiment prompted participants to click a button indicating that they understood their role rather than asking them to type their role into a text box.</p>
 <p><strong>Analysis </strong>: There are two major analytic differences between the original study and this replication project. First, usage of the modal <em>shall</em> is the main focus of analysis rather than center-embedding. Second, genre is the primary manipulation of interest rather than genre and sequencing (although I still assess the effect of sequencing on <em>shall</em> usage).</p>
 <section id="actual-sample" class="level4">
 <h4 class="anchored" data-anchor-id="actual-sample">Actual Sample</h4>
@@ -252,74 +251,192 @@ The materials in the experiment consisted of eight items. Each item consisted of
 <h2 class="anchored" data-anchor-id="results">Results</h2>
 <section id="data-preparation" class="level3">
 <h3 class="anchored" data-anchor-id="data-preparation">Data preparation</h3>
+<section id="data-organization" class="level4">
+<h4 class="anchored" data-anchor-id="data-organization">Data organization</h4>
+</section>
+<section id="column-creation" class="level4">
+<h4 class="anchored" data-anchor-id="column-creation">Column Creation</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add column for genre to main data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"law, editing"</span>, <span class="st">"law, from scratch"</span>) <span class="sc">~</span> <span class="st">"legal"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"tour guide, editing"</span>, <span class="st">"tour guide, from scratch"</span>) <span class="sc">~</span> <span class="st">"tourguide"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># add column for sequencing</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">sequencing =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"tour guide, from scratch"</span>, <span class="st">"law, from scratch"</span>) <span class="sc">~</span> <span class="st">"from scratch"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>      condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"tour guide, editing"</span>, <span class="st">"law, editing"</span>) <span class="sc">~</span> <span class="st">"editing"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co"># add columns for genre and sequencing to experiment 1 data</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: it is not necessary to go trhouhg this process for the experiment 2 data because there is no sequencing manipulation and the data already includes a genre column</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>exp1_data <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">domain =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(column_name, <span class="st">"law"</span>), <span class="st">"legal"</span>, <span class="st">"fiction_author"</span>),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">sequencing =</span> <span class="fu">if_else</span>(<span class="fu">str_detect</span>(column_name, <span class="st">"full"</span>), <span class="st">"from_scratch"</span>, <span class="st">"editing"</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#get total number of shalls used in main data</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>shall_count <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(response)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(num_shall))</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">#get total number of shalls used in experiment 1 responses</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>exp1_shall_count <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall_exp1 =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(num_shall_exp1))</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">#get total number of shalls used in experiment 2 responses</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>exp2_shall_count <span class="ot">&lt;-</span> exp2_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall_exp2 =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(num_shall_exp2))</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co"># add column counting shalls per row to main data frame</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co"># add column counting shalls per row to experiment 1 data frame</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>exp1_data <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall_exp1 =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co"># add column counting shalls per row to experiment 2 data frame</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>exp2_data <span class="ot">&lt;-</span> exp2_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num_shall_exp2 =</span> <span class="fu">str_count</span>(response, <span class="fu">regex</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">bshall</span><span class="sc">\\</span><span class="st">b"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="confirmatory-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="confirmatory-analysis">Confirmatory analysis</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by domain</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>shall_by_domain <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain) <span class="sc">%&gt;%</span>  <span class="co"># or replace `condition` with `role` if more appropriate</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall =</span> <span class="fu">sum</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#shall_by_domain</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by sequencing</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>shall_by_sequencing <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing) <span class="sc">%&gt;%</span>  <span class="co"># or replace `condition` with `role` if more appropriate</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall =</span> <span class="fu">sum</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#shall_by_sequencing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by domain for main sample</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>shall_by_domain <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall =</span> <span class="fu">sum</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#shall_by_domain</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by domain for experiment 1</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>exp1_shall_by_domain <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain) <span class="sc">%&gt;%</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall_exp1 =</span> <span class="fu">sum</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall_exp1 =</span> <span class="fu">mean</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>exp1_shall_by_domain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  domain         total_shall_exp1 mean_shall_exp1     n
+  &lt;chr&gt;                     &lt;int&gt;           &lt;dbl&gt; &lt;int&gt;
+1 fiction_author               32          0.0457   700
+2 legal                       560          0.8      700</code></pre>
 </div>
-<section id="visualizations" class="level4">
-<h4 class="anchored" data-anchor-id="visualizations">Visualizations</h4>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by domain for experiment 2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>exp2_shall_by_domain <span class="ot">&lt;-</span> exp2_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genre) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall_exp2 =</span> <span class="fu">sum</span>(num_shall_exp2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall_exp2 =</span> <span class="fu">mean</span>(num_shall_exp2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#exp2_shall_by_domain </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by sequencing for main sample</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>shall_by_sequencing <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall =</span> <span class="fu">sum</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#shall_by_sequencing</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#get shall count by sequencing for experiment 1</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>exp1_shall_by_sequencing <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing) <span class="sc">%&gt;%</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_shall_exp1 =</span> <span class="fu">sum</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_shall_exp1 =</span> <span class="fu">sum</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">#exp1_shall_by_sequencing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="visualizations-of-results-from-martínez-et-al.-2024" class="level4">
+<h4 class="anchored" data-anchor-id="visualizations-of-results-from-martínez-et-al.-2024">Visualizations of results from Martínez et al.&nbsp;(2024)</h4>
+<p>Although the key analysis of interest in this project is distinct from that used in Martínez et al.&nbsp;(2024), the data from the authors’ experiment can be analyzed according to the method used here. The visualizations below offer support for the view that genre is more impactful on <em>shall</em> usage than writing condition. The data from experiments 1 and 2 in Martínez et al.&nbsp;(2024) reveal that there is an observable difference in mean <em>shall</em> usage between legal and non-legal writing, even when the conceptual complexity is consistent across tasks. In addition, data from experiment 1 indicates that the difference in <em>shall</em> usage by writing condition is not as large as that observed across genres. To the extent that <em>shall</em> usage is able to be used as a proxy measure for center-embedding usage, this is consistent with the authors’ findings in the original study.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a barplot to show shall usage by genre</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(domain))<span class="sc">%&gt;%</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain) <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> domain, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"chocolate4"</span>) <span class="sc">+</span> </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average use of 'shall' by genre"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot showing shall usage by genre for experiment 1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>exp1figa <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(domain))<span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domain =</span> <span class="fu">factor</span>(domain, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"legal"</span>, <span class="st">"fiction_author"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain)<span class="sc">%&gt;%</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall_exp1 =</span> <span class="fu">mean</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_exp1 =</span> <span class="fu">sd</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> domain, <span class="at">y =</span> mean_shall_exp1)) <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"chocolate4"</span>) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall_exp1 <span class="sc">-</span> se_exp1, <span class="at">ymax =</span> mean_shall_exp1 <span class="sc">+</span> se_exp1), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Use of 'shall' by genre (exp.1)"</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Genre"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span>) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>exp1figb <span class="ot">&lt;-</span> exp1_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sequencing))<span class="sc">%&gt;%</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing)<span class="sc">%&gt;%</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall_exp1 =</span> <span class="fu">mean</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_exp1 =</span> <span class="fu">sd</span>(num_shall_exp1, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sequencing, <span class="at">y =</span> mean_shall_exp1)) <span class="sc">+</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall_exp1 <span class="sc">-</span> se_exp1, <span class="at">ymax =</span> mean_shall_exp1 <span class="sc">+</span> se_exp1), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Use of 'shall' by sequencing (exp.1)"</span>,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Writing Condition"</span>,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span>) <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>exp1figa <span class="sc">+</span> exp1figb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ReplicationReport_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ReplicationReport_files/figure-html/figures-side-exp1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shall usage by sequencing</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot to show shall usage by sequencing</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sequencing))<span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sequencing, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span> </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average use of 'shall' by sequencing"</span>,</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot showing shall usage by genre for experiment 2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>exp2fig <span class="ot">&lt;-</span> exp2_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(genre))<span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(genre)<span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall_exp2 =</span> <span class="fu">mean</span>(num_shall_exp2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_exp2 =</span> <span class="fu">sd</span>(num_shall_exp2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genre, <span class="at">y =</span> mean_shall_exp2)) <span class="sc">+</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall_exp2 <span class="sc">-</span> se_exp2, <span class="at">ymax =</span> mean_shall_exp2 <span class="sc">+</span> se_exp2), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average use of 'shall' by genre in experiment 2"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">x =</span> <span class="st">"Genre"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span>) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>exp2fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -328,24 +445,76 @@ The materials in the experiment consisted of eight items. Each item consisted of
 </div>
 </div>
 </div>
+</section>
+<section id="visualizations-from-main-sample" class="level4">
+<h4 class="anchored" data-anchor-id="visualizations-from-main-sample">Visualizations from main sample</h4>
+<p>Consistent with the findings in Martínez et al.&nbsp;(2024), data from the replication experiment indicate that genre has a greater effect on <em>shall</em> usage than writing condition. This is consistent with the analysis above.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a barplot to show shall usage by condition</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(condition))<span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"plum"</span>) <span class="sc">+</span> </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average use of 'shall' by condition"</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#barplot showing shall usage by genre for main sample</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>figa <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(domain))<span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(domain) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> domain, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"chocolate4"</span>) <span class="sc">+</span> </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Use of 'shall' by genre in main sample"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Genre"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># shall usage by sequencing</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># barplot to show shall usage by sequencing</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>figb <span class="ot">&lt;-</span> all_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sequencing))<span class="sc">%&gt;%</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sequencing) <span class="sc">%&gt;%</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sequencing, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"purple"</span>) <span class="sc">+</span> </span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Use of 'shall' by sequencing"</span>,</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Writing Condition"</span>,</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>figa <span class="sc">+</span> figb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ReplicationReport_files/figure-html/figures-side-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Looking at all four conditions together, average <em>shall</em> usage is higher in trials in the legal genre regardless of whether the text was written from scratch or in an iterative process.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#make a barplot to show shall usage by condition</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(condition))<span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_shall)) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"plum"</span>) <span class="sc">+</span> </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span>se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average use of 'shall' by condition"</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens by response"</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -354,26 +523,26 @@ The materials in the experiment consisted of eight items. Each item consisted of
 </div>
 </div>
 </div>
-<p>These results are similar to Martínez et al.’s findings. Genre seeems to have a much greater effect on <em>shall</em> usage than sequencing. <img src="martinez%20et%20al.%20visual.png" class="img-fluid" alt="Martínez et al.&nbsp;experiment 1 results"> There is some variation in <em>shall</em> usage across trials, but writing in the legal genre uses <em>shall</em> at much higher rates than writing in the tour guide genre.</p>
+<p>Overall, these results are like to Martínez et al.’s findings, which indicated that genre effects center-embedding usagh more than writing process. Similarly, genre appears to have a much greater effect on <em>shall</em> usage than sequencing. <img src="martinez%20et%20al.%20visual.png" class="img-fluid" alt="Martínez et al.&nbsp;experiment 1 results"> Although there is variation in <em>shall</em> usage across trials, writing in the legal genre uses <em>shall</em> at much higher rates than writing in the tour guide genre. In addition, <em>shall</em> usage in writing in the legal genre appears to vary to a greater extent than <em>shall</em> usage in the non-legal genre.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trial_number), <span class="sc">!</span><span class="fu">is.na</span>(domain)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trial_number, domain) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(trial_number), <span class="at">y =</span> mean_shall, <span class="at">color =</span> domain)) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span> se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"'Shall' Usage by Trial (Fixed Domain per Trial)"</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Trial Number"</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens"</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Domain"</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trial_number), <span class="sc">!</span><span class="fu">is.na</span>(domain)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trial_number, domain) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_shall =</span> <span class="fu">mean</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(num_shall, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(trial_number), <span class="at">y =</span> mean_shall, <span class="at">color =</span> domain)) <span class="sc">+</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_shall <span class="sc">-</span> se, <span class="at">ymax =</span> mean_shall <span class="sc">+</span> se), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"'Shall' Usage by Trial (Fixed Genre per Trial)"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Trial Number"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean number of 'shall' tokens"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Genre"</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -383,15 +552,18 @@ The materials in the experiment consisted of eight items. Each item consisted of
 </div>
 </div>
 </section>
-<section id="statistical-models" class="level4">
-<h4 class="anchored" data-anchor-id="statistical-models">Statistical Models</h4>
-<p>There is a significant effect of genre on <em>shall</em> usage.</p>
+<section id="statistical-models-for-replication-experiment-and-martínez-et-al.-2024" class="level4">
+<h4 class="anchored" data-anchor-id="statistical-models-for-replication-experiment-and-martínez-et-al.-2024">Statistical Models for Replication Experiment and Martínez et al.&nbsp;(2024)</h4>
+<p>The outcome variable of interest in this project is <em>shall</em> usage. However, this variable may be measured in multiple ways. On the one hand, the number of times <em>shall</em> is used per response is a viable anayltic option. In order to assess the effect of genre and writing condition <em>shall</em> usage measured in this way, I use a random effects poisson regression model. In the alternative, <em>shall</em> usage may be measured in binary terms, where the relevant outcome variable is whether a participant opted to use <em>shall</em> at all in their response. This measure of <em>shall</em> usage is assessed with logistic regression.</p>
+<section id="general-linear-mixed-effects-model-results-for-replication-experiment" class="level5">
+<h5 class="anchored" data-anchor-id="general-linear-mixed-effects-model-results-for-replication-experiment">General Linear Mixed Effects Model Results for Replication Experiment</h5>
+<p>In the model below, the effect of genre (“domain” in the code below) on the number of times <em>shall</em> is used is assessed, with individual participant (“file” in the code below) and item (“trial_index” in the code below). Results indicate that there is a significant effect of genre on <em>shall</em> usage (p = 0.00115). Participants writing in the legal genre are predicted to use <em>shall</em> more frequently in the legal genre (estimated mean usage of <em>shall</em> in this condition is e<sup>-0.8782</sup>, or 0.415 times per response) than in the tour guide condition (estimated mean usage of <em>shall</em> in this condition is e<sup>-5.587</sup>, or 0.004 times per response). Although variation across items was limited (standard deviation of random slope for item = 0.075), there was much greater variation in how much different participants adjusted in <em>shall</em> usage by genre (standard deviation of random slope for participant = 4.363).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(num_shall))<span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glmer</span>(num_shall<span class="sc">~</span>domain<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>domain<span class="sc">|</span>file)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>trial_index), </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>., <span class="at">family =</span> <span class="st">"poisson"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(num_shall))<span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glmer</span>(num_shall<span class="sc">~</span>domain<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>domain<span class="sc">|</span>file)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>trial_index), </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>., <span class="at">family =</span> <span class="st">"poisson"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
@@ -400,71 +572,76 @@ Formula: num_shall ~ domain + (1 + domain | file) + (1 | trial_index)
    Data: .
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    800.0     825.7    -394.0     788.0       530 
+    755.9     781.3    -372.0     743.9       506 
 
 Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--2.8681 -0.3387 -0.0570 -0.0471  3.4267 
+   Min     1Q Median     3Q    Max 
+-2.867 -0.339 -0.041 -0.034  3.403 
 
 Random effects:
  Groups      Name            Variance  Std.Dev. Corr 
- file        (Intercept)      2.737487 1.65454       
-             domaintourguide 14.580338 3.81842  -0.36
- trial_index (Intercept)      0.005103 0.07143       
-Number of obs: 536, groups:  file, 67; trial_index, 8
+ file        (Intercept)      2.790067 1.67035       
+             domaintourguide 19.038720 4.36334  -0.32
+ trial_index (Intercept)      0.005663 0.07525       
+Number of obs: 512, groups:  file, 64; trial_index, 8
 
 Fixed effects:
-                Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)      -0.9014     0.2624  -3.435 0.000593 ***
-domaintourguide  -4.8616     1.7297  -2.811 0.004943 ** 
+                Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)      -0.8782     0.2701  -3.251  0.00115 **
+domaintourguide  -5.5867     1.8032  -3.098  0.00195 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr)
-domaintorgd -0.148</code></pre>
+domaintorgd -0.141</code></pre>
 </div>
 </div>
-<p>There is not a significant effect of sequencing on <em>shall</em> usage.</p>
+<p>Although genre has a significant effect on <em>shall</em> usage, sequencing does not.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(num_shall))<span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glmer</span>(num_shall<span class="sc">~</span>sequencing<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>domain<span class="sc">|</span>file)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>trial_index), </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>., <span class="at">family =</span> <span class="st">"poisson"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>all_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(num_shall))<span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glmer</span>(num_shall<span class="sc">~</span>sequencing<span class="sc">+</span>(<span class="dv">1</span><span class="sc">+</span>sequencing<span class="sc">|</span>file)<span class="sc">+</span>(<span class="dv">1</span><span class="sc">|</span>trial_index), </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">data=</span>., <span class="at">family =</span> <span class="st">"poisson"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
  Family: poisson  ( log )
-Formula: num_shall ~ sequencing + (1 + domain | file) + (1 | trial_index)
+Formula: num_shall ~ sequencing + (1 + sequencing | file) + (1 | trial_index)
    Data: .
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-    830.5     856.2    -409.3     818.5       530 
+    819.1     844.6    -403.6     807.1       506 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.7740 -0.3114 -0.2234 -0.1214  3.1008 
+-2.4019 -0.3622 -0.2033 -0.0734  6.4898 
 
 Random effects:
- Groups      Name            Variance Std.Dev. Corr 
- file        (Intercept)     3.275    1.810         
-             domaintourguide 4.310    2.076    -0.71
- trial_index (Intercept)     1.308    1.144         
-Number of obs: 536, groups:  file, 67; trial_index, 8
+ Groups      Name                   Variance Std.Dev. Corr 
+ file        (Intercept)            2.8036   1.6744        
+             sequencingfrom scratch 0.1081   0.3288   -0.12
+ trial_index (Intercept)            2.3082   1.5193        
+Number of obs: 512, groups:  file, 64; trial_index, 8
 
 Fixed effects:
                        Estimate Std. Error z value Pr(&gt;|z|)  
-(Intercept)             -1.8280     0.7189  -2.543    0.011 *
-sequencingfrom scratch  -0.8060     0.8813  -0.915    0.360  
+(Intercept)             -1.6985     0.9248  -1.837   0.0663 .
+sequencingfrom scratch  -1.0336     1.1509  -0.898   0.3691  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
             (Intr)
-sqncngfrmsc -0.711</code></pre>
+sqncngfrmsc -0.759</code></pre>
 </div>
 </div>
+</section>
+<section id="logistic-regression-results" class="level5">
+<h5 class="anchored" data-anchor-id="logistic-regression-results">Logistic Regression Results</h5>
+<p>Treating the presecnce of absence f</p>
+</section>
 </section>
 </section>
 </section>

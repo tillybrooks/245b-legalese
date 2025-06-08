@@ -113,6 +113,7 @@ library(jsonlite)
 library(purrr)
 library(ggplot2)
 library(lme4)
+library(patchwork)
 # use a nicer theme
 theme_set(theme_few())
 
@@ -136,7 +137,7 @@ cols_of_interest = c("1_law_seq_R", "2_law_full_R", "3_story_seq_R", "4_story_fu
   "1_law_full_R", "2_story_seq_R", "3_story_full_R", "4_law_seq_R",
   "5_law_full_R", "6_story_seq_R", "7_story_full_R", "8_law_seq_R",
   "1_story_seq_R", "2_story_full_R", "3_law_seq_R", "4_law_full_R",
-  "5_story_seq_R", "6_story_full_R", "7_law_seq_R", "8_law_full_R")
+  "5_story_seq_R", "6_story_full_R", "7_law_seq_R", "8_law_full_R", "PROLIFIC_PID")
 
 exp1_data <- list.files(exp1_path, pattern = "*.csv", full.names = TRUE) %>%
   map_dfr(~ read_csv(.x, show_col_types = FALSE) %>%
@@ -147,7 +148,7 @@ exp1_data <- exp1_data %>%
   slice(-1:-3)
 
 # repeat process for experiment 2 data
-relevant_cols = c("item", "genre","response")
+relevant_cols = c("item", "genre","response",  "PROLIFIC_PID")
 
 exp2_data <- read_csv( "/Users/tillybrooks/Library/CloudStorage/OneDrive-Stanford/linguistics/spring 2025/psycholinguistics/project_analysis/original_study_data2/responses_with_mistakes_preregistered_experiment_2.csv", show_col_types = FALSE) %>%
   select(all_of(relevant_cols))
@@ -243,38 +244,140 @@ exp2_shall_count <- exp2_data %>%
 all_data <- all_data %>%
   mutate(num_shall = str_count(response, regex("\\bshall\\b", ignore_case = TRUE)))
 
+# create a column documenting shall usage as a binary outcome variable
+all_data <- all_data %>%
+  mutate(shall_used = ifelse(num_shall > 0, 1, 0))
+
 # add column counting shalls per row to experiment 1 data frame
 exp1_data <- exp1_data %>%
   mutate(num_shall_exp1 = str_count(response, regex("\\bshall\\b", ignore_case = TRUE)))
 
+# create a column documenting shall usage as a binary outcome variable
+exp1_data <- exp1_data %>%
+  mutate(shall_used = ifelse(num_shall_exp1 > 0, 1, 0))
+
 # add column counting shalls per row to experiment 2 data frame
 exp2_data <- exp2_data %>%
   mutate(num_shall_exp2 = str_count(response, regex("\\bshall\\b", ignore_case = TRUE)))
+
+# create a column documenting shall usage as a binary outcome variable
+exp2_data <- exp2_data %>%
+  mutate(shall_used = ifelse(num_shall_exp2 > 0, 1, 0))
 ```
 
 ### Confirmatory analysis
 ```{r}
-#get shall count by domain
+#get shall count by domain for main sample
 shall_by_domain <- all_data %>%
-  group_by(domain) %>%  # or replace `condition` with `role` if more appropriate
+  group_by(domain) %>%
   summarise(total_shall = sum(num_shall, na.rm = TRUE),
             mean_shall = mean(num_shall, na.rm = TRUE),
             n = n())
 #shall_by_domain
 
-#get shall count by sequencing
+#get shall count by domain for experiment 1
+exp1_shall_by_domain <- exp1_data %>%
+  group_by(domain) %>%
+  summarise(total_shall_exp1 = sum(num_shall_exp1, na.rm = TRUE),
+            mean_shall_exp1 = mean(num_shall_exp1, na.rm = TRUE),
+            n = n())
+exp1_shall_by_domain
+
+#get shall count by domain for experiment 2
+exp2_shall_by_domain <- exp2_data %>%
+  group_by(genre) %>%
+  summarise(total_shall_exp2 = sum(num_shall_exp2, na.rm = TRUE),
+            mean_shall_exp2 = mean(num_shall_exp2, na.rm = TRUE),
+            n = n())
+#exp2_shall_by_domain 
+
+#get shall count by sequencing for main sample
 shall_by_sequencing <- all_data %>%
-  group_by(sequencing) %>%  # or replace `condition` with `role` if more appropriate
+  group_by(sequencing) %>% 
   summarise(total_shall = sum(num_shall, na.rm = TRUE),
             mean_shall = mean(num_shall, na.rm = TRUE),
             n = n())
 
 #shall_by_sequencing
+
+#get shall count by sequencing for experiment 1
+exp1_shall_by_sequencing <- exp1_data %>%
+  group_by(sequencing) %>%
+  summarise(total_shall_exp1 = sum(num_shall_exp1, na.rm = TRUE),
+            mean_shall_exp1 = sum(num_shall_exp1, na.rm = TRUE),
+            n = n())
+
+#exp1_shall_by_sequencing
 ```
-#### Visualizations
+#### Visualizations of results from Martínez et al. (2024)
+Although the key analysis of interest in this project is distinct from that used in Martínez et al. (2024), the data from the authors' experiment can be analyzed according to the method used here.  The visualizations below offer support for the view that genre is more impactful on *shall* usage than writing condition.  The data from experiments 1 and 2 in Martínez et al. (2024) reveal that there is an observable difference in mean *shall* usage between legal and non-legal writing, even when the conceptual complexity is consistent across tasks.  In addition, data from experiment 1 indicates that the difference in *shall* usage by writing condition is not as large as that observed across genres.  To the extent that *shall* usage is able to be used as a proxy measure for center-embedding usage, this is consistent with the authors' findings in the original study.  
+
+```{r, figures-side-exp1, fig.show="hold", out.width="100%"}
+# barplot showing shall usage by genre for experiment 1
+exp1figa <- exp1_data %>%
+  filter(!is.na(domain))%>%
+  mutate(domain = factor(domain, levels = c("legal", "fiction_author"))) %>%
+  group_by(domain)%>%
+  summarise(
+    mean_shall_exp1 = mean(num_shall_exp1, na.rm = TRUE),
+    se_exp1 = sd(num_shall_exp1, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = domain, y = mean_shall_exp1)) +
+  geom_bar(stat = "identity", fill = "chocolate4") +
+  geom_errorbar(aes(ymin = mean_shall_exp1 - se_exp1, ymax = mean_shall_exp1 + se_exp1), width = 0.2) +
+  labs(
+    title = "Use of 'shall' by genre (exp.1)",
+     x = "Genre",
+    y = "Mean number of 'shall' tokens by response") +
+  theme_minimal()
+  
+
+exp1figb <- exp1_data %>%
+  filter(!is.na(sequencing))%>%
+  group_by(sequencing)%>%
+  summarise(
+    mean_shall_exp1 = mean(num_shall_exp1, na.rm = TRUE),
+    se_exp1 = sd(num_shall_exp1, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = sequencing, y = mean_shall_exp1)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  geom_errorbar(aes(ymin = mean_shall_exp1 - se_exp1, ymax = mean_shall_exp1 + se_exp1), width = 0.2) +
+  labs(
+    title = "Use of 'shall' by sequencing (exp.1)",
+     x = "Writing Condition",
+    y = "Mean number of 'shall' tokens by response") +
+  theme_minimal()
+
+exp1figa + exp1figb
+```
+
 ```{r}
-#make a barplot to show shall usage by genre
-all_data %>%
+# barplot showing shall usage by genre for experiment 2
+exp2fig <- exp2_data %>%
+  filter(!is.na(genre))%>%
+  group_by(genre)%>%
+  summarise(
+    mean_shall_exp2 = mean(num_shall_exp2, na.rm = TRUE),
+    se_exp2 = sd(num_shall_exp2, na.rm = TRUE) / sqrt(n())
+  ) %>%
+  ggplot(aes(x = genre, y = mean_shall_exp2)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  geom_errorbar(aes(ymin = mean_shall_exp2 - se_exp2, ymax = mean_shall_exp2 + se_exp2), width = 0.2) +
+  labs(
+    title = "Average use of 'shall' by genre in experiment 2",
+     x = "Genre",
+    y = "Mean number of 'shall' tokens by response") +
+  theme_minimal()
+
+exp2fig
+```
+
+ 
+#### Visualizations from main sample
+Consistent with the findings in Martínez et al. (2024), data from the replication experiment indicate that genre has a greater effect on *shall* usage than writing condition.  This is consistent with the analysis above.
+```{r, figures-side, fig.show="hold", out.width="100%"}
+#barplot showing shall usage by genre for main sample
+figa <- all_data %>%
   filter(!is.na(domain))%>%
   group_by(domain) %>%
   summarise(
@@ -285,17 +388,15 @@ all_data %>%
   geom_bar(stat = "identity", fill = "chocolate4") + 
   geom_errorbar(aes(ymin = mean_shall -se, ymax = mean_shall + se), width = 0.2) +
   labs(
-    title = "Average use of 'shall' by genre",
-    x = "Condition",
+    title = "Use of 'shall' by genre in main sample",
+    x = "Genre",
     y = "Mean number of 'shall' tokens by response"
   ) +
   theme_minimal()
 
-```
-```{r}
 # shall usage by sequencing
 # barplot to show shall usage by sequencing
-all_data %>%
+figb <- all_data %>%
   filter(!is.na(sequencing))%>%
   group_by(sequencing) %>%
   summarise(
@@ -306,12 +407,15 @@ all_data %>%
   geom_bar(stat = "identity", fill = "purple") + 
   geom_errorbar(aes(ymin = mean_shall -se, ymax = mean_shall + se), width = 0.2) +
   labs(
-    title = "Average use of 'shall' by sequencing",
-    x = "Condition",
+    title = "Use of 'shall' by sequencing",
+    x = "Writing Condition",
     y = "Mean number of 'shall' tokens by response"
   ) +
   theme_minimal()
+
+figa + figb
 ```
+Looking at all four conditions together, average *shall* usage is higher in trials in the legal genre regardless of whether the text was written from scratch or in an iterative process.
 ```{r}
 #make a barplot to show shall usage by condition
 all_data %>%
@@ -331,9 +435,9 @@ all_data %>%
   ) +
   theme_minimal()
 ```
-These results are similar to Martínez et al.'s findings.  Genre seeems to have a much greater effect on *shall* usage than sequencing.
+Overall, these results are like to Martínez et al.'s findings, which indicated that genre effects center-embedding usagh more than writing process.  Similarly, genre appears to have a much greater effect on *shall* usage than sequencing.
 ![Martínez et al. experiment 1 results](martinez et al. visual.png)
-There is some variation in *shall* usage across trials, but writing in the legal genre uses *shall* at much higher rates than writing in the tour guide genre.
+Although there is variation in *shall* usage across trials, writing in the legal genre uses *shall* at much higher rates than writing in the tour guide genre.  In addition, *shall* usage in writing in the legal genre appears to vary to a greater extent than *shall* usage in the non-legal genre.
 ```{r}
 all_data %>%
   filter(!is.na(trial_number), !is.na(domain)) %>%
@@ -347,38 +451,133 @@ all_data %>%
   geom_point(size = 3) +
   geom_errorbar(aes(ymin = mean_shall - se, ymax = mean_shall + se), width = 0.2) +
   labs(
-    title = "'Shall' Usage by Trial (Fixed Domain per Trial)",
+    title = "'Shall' Usage by Trial (Fixed Genre per Trial)",
     x = "Trial Number",
     y = "Mean number of 'shall' tokens",
-    color = "Domain"
+    color = "Genre"
   ) +
   theme_minimal()
 ```
 #### Statistical Models
-There is a significant effect of genre on *shall* usage.
+The outcome variable of interest in this project is *shall* usage.  However, this variable may be measured in multiple ways.  On the one hand, the number of times *shall* is used per response is a viable analytic option.  In order to assess the effect of genre and writing condition *shall* usage measured in this way, I use a random effects poisson regression model.  In the alternative, *shall* usage may be measured in binary terms, where the relevant outcome variable is whether a participant opted to use *shall* at all in their response.  This measure of *shall* usage is assessed with logistic regression.
+
+
+##### General Linear Mixed Effects Model Results
+ 
+In the model below, the effect of genre ("domain" in the code below) on the number of times *shall* was used was assessed, with individual participant ("file" in the code below) and item ("trial_index" in the code below) as random effects.  Results indicate that there is a significant effect of genre on *shall* usage (p = 0.00115).  Participants writing in the legal genre are predicted to use *shall* more frequently in the legal genre (estimated mean usage of *shall* in this condition is e^-0.8782^, or 0.415 times per response) than in the tour guide condition (estimated mean usage of *shall* in this condition is e^-5.587^, or 0.004 times the expected usage per response in the legal condition).  Although  variation across items was limited (standard deviation of random slope for item = 0.075), there was much greater variation in how much different participants adjusted in *shall* usage by genre (standard deviation of random slope for participant = 4.363).
 ```{r}
 all_data %>%
   filter(!is.na(num_shall))%>%
 glmer(num_shall~domain+(1+domain|file)+(1|trial_index), 
       data=., family = "poisson")%>%
   summary()
+
 ```
-There is not a significant effect of sequencing on *shall* usage.
+
+Although genre has a significant effect on *shall* usage, sequencing does not. In the model below, the effect of sequencing on the number of times *shall* was used was assessed, with individual participant and item as random effects. Here, participants writing in the editing condition were predicted to use *shall* more frequently in those writing in the from scratch condition.  Estimated mean usage of *shall* in the editing condition was e^-1.6985^, or 0.183 times per response, while estimated mean usage of *shall* in the from scratch condition is e^-1.0336^, or 0.356 times the expected usage per response in the editing condition).  However, this predicted difference is not statistically significant (p = 0.369).  The results of this model indicate variation in *shall* usage across items, with a standard deviation of random slope for items of 1.519.  Variation by partipant is limited (standard deviation of random slope for participant = 0.329).
 ```{r}
 all_data %>%
   filter(!is.na(num_shall))%>%
-glmer(num_shall~sequencing+(1+domain|file)+(1|trial_index), 
+glmer(num_shall~sequencing+(1+sequencing|file)+(1|trial_index), 
       data=., family = "poisson")%>%
   summary()
 ```
 
+##### Logistic Regression Results
+
+Treating *shall* usage as a binary variable, a logistic regression model predicting the presence of absence of the word in a response was used to analyze the data.  As with the linear models above, participant and item were taken as random effects.  The results of this model again indicate that genre has a significant effect on *shall* usage (p < 0.001).  Although there was little variance by item, substantial variation by participant was observed. 
+
+```{r}
+logistic_genre <- glmer(
+  shall_used ~ domain + (1 + domain | file) + (1 | trial_index),
+  data = all_data,
+  family = binomial
+)
+
+summary(logistic_genre)
+```
+In the case of the logistic regression model assessing the effect of sequencing on *shall* usage, the model predicted that *shall* usage would be greater in responses produced in the editing condition, but the prediction was not statistically significant (p=0.624).  
+```{r}
+logistic_seq <- glmer(
+  shall_used ~ sequencing + (1 + sequencing | file) + (1 | trial_index),
+  data = all_data,
+  family = binomial
+)
+
+summary(logistic_seq)
+```
+
 ## Discussion
 
-
 ### Summary of Replication Attempt
-I find a significant effect of genre on usage of the central modal *shall* in the responses.  This is consistent with Martínez et al.'s finding.  I take this to indicate that support for the authors' conclusion that legalese is convoluted because legal writers want to convey something, not because the conceptual complexity of the genre demands it.  These results are consistent with the magic spell hypothesis and inconsistent with the deonticity expressing and copy-and-edit hypotheses.
+I find a significant effect of genre on usage of the central modal *shall* in the responses.  This is consistent with Martínez et al.'s (2024) finding that it is genre, not writing process, which results in the distinctive linguistic properties of legalese.  I take this to indicate that support for the authors' conclusion that legalese is convoluted because legal writers want to convey something, not because the conceptual complexity of the genre demands it.  These results are consistent with the magic spell hypothesis and inconsistent with the deonticity expressing and copy-and-edit hypotheses.  In addition, I take these results to offer evidence against the deonticity expressing hypothesis because genre does appear to have a significant on *shall* usage.
 
 
 ### Commentary
 
-Although the results of the study are consistent with the magic spell hypothesis, an important question remains unanwered: why do the particular strategies we see in legalese (*e.g.*, center-embedding, uncommon modals) seem to make statutes sound more authoritative?  I hypothesize that the markedness of these constructions is the explanation.  It may be the case that the infrequency of shall in other contexts allows it to be easily recognizable as serving a particular function in the legal context.  This is why shall is used in contexts where we might expect to see a more common modal like must.
+Although the results of the study are consistent with the magic spell hypothesis, an important question remains unanswered: why do the particular strategies we see in legalese (*e.g.*, center-embedding, uncommon modals) seem to make statutes sound more authoritative?  I hypothesize that the markedness of these constructions is the explanation.  It may be the case that the infrequency of shall in other contexts allows it to be easily recognizable as serving a particular function in the legal context.  This may explain why *shall* is used in contexts where we might expect to see a more common modal like must.  Further research on this topic is needed to empirically assess this hypothesis.
+
+## Additional Analysis
+### Statistical Models for the Experiments 1 and 2 in Martínez et al. (2024)
+The data from Martínez et al. (2024) experiment 1 also indicates that there is a significant effect of genre, but not sequencing, on *shall* usage.  In the case of experiment 2, the data available on OSF was too sparse to properly assess with the analysis plan specified in this project. 
+
+#### General Linear Mixed Effects Model Results
+```{r}
+# shall usage by genre in experiment 1
+exp1_data %>%
+  filter(!is.na(num_shall_exp1))%>%
+glmer(num_shall_exp1~domain+(1+domain|column_name), 
+      data=., family = "poisson")%>%
+  summary()
+```
+
+```{r}
+# shall usage by sequencing in experiment 1
+exp1_data %>%
+  filter(!is.na(num_shall_exp1))%>%
+glmer(num_shall_exp1~sequencing+(1+sequencing|column_name), 
+      data=., family = "poisson")%>%
+  summary()
+```
+
+```{r}
+# shall usage by genre in experiment 2
+exp2_data %>%
+  filter(!is.na(num_shall_exp2))%>%
+glmer(num_shall_exp2~genre+(1+genre|item), 
+      data=., family = "poisson")%>%
+  summary()
+```
+
+#### Logistic Regression Results
+
+```{r}
+# shall usage by genre in experiment 1
+logistic_genre1 <- glmer(
+  shall_used ~ domain + (1 + domain | PROLIFIC_PID) + (1 | column_name),
+  data = exp1_data,
+  family = binomial
+)
+
+summary(logistic_genre1)
+```
+```{r}
+# shall usage by sequencing in experiment 1
+logistic_seq1 <- glmer(
+  shall_used ~ sequencing + (1 + sequencing | PROLIFIC_PID) + (1 | column_name),
+  data = exp1_data,
+  family = binomial
+)
+
+summary(logistic_seq1)
+```
+```{r}
+# shall usage by genre in experiment 2
+logistic_genre2 <- glmer(
+  shall_used ~ genre + (1 + genre | PROLIFIC_PID) + (1 | item),
+  data = exp2_data,
+  family = binomial
+)
+
+summary(logistic_genre2)
+```
