@@ -1,5 +1,5 @@
 ---
-title: "Replication of Martínez et al. (2024)"
+title: "Genre, not contents, determine *shall* usage in legal texts"
 author: "Tilly Brooks (teb44@stanford.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
